@@ -25,4 +25,24 @@ class FrontendController extends Controller
     {
         return view('frontend.protfolio');
     }
+
+    public function team()
+    {
+        return view('frontend.team');
+    }
+
+    public function blog()
+    {
+        return view('frontend.blog');
+    }
+
+    public function pricing()
+    {
+        return view('frontend.pricing');
+    }
+
+    public function contact()
+    {
+        return view('frontend.contact');
+    }
 }
