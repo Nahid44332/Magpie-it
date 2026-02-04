@@ -32,7 +32,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-2">
-          <a href="blog-details.html" class="text-light">
+          <a href="{{url('/blog-details')}}" class="text-light">
             <i class="bi bi-arrow-right-circle fs-3"></i>
           </a>
           <div class="project-year" style="color:#999;">2025</div>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-2">
-          <a href="blog-details.html" class="text-light">
+          <a href="{{url('/blog-details')}}" class="text-light">
             <i class="bi bi-arrow-right-circle fs-3"></i>
           </a>
           <div class="project-year" style="color:#999;">2025</div>
@@ -90,7 +90,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-2">
-          <a href="blog-details.html" class="text-light">
+          <a href="{{url('/blog-details')}}" class="text-light">
             <i class="bi bi-arrow-right-circle fs-3"></i>
           </a>
           <div class="project-year" style="color:#999;">2025</div>
@@ -119,7 +119,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-2">
-          <a href="blog-details.html" class="text-light">
+          <a href="{{url('/blog-details')}}" class="text-light">
             <i class="bi bi-arrow-right-circle fs-3"></i>
           </a>
           <div class="project-year" style="color:#999;">2025</div>
@@ -148,7 +148,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-2">
-          <a href="blog-details.html" class="text-light">
+          <a href="{{url('/blog-details')}}" class="text-light">
             <i class="bi bi-arrow-right-circle fs-3"></i>
           </a>
           <div class="project-year" style="color:#999;">2025</div>
@@ -177,7 +177,7 @@
         </div>
 
         <div class="d-flex align-items-center gap-2">
-          <a href="blog-details.html" class="text-light">
+          <a href="{{url('/blog-details')}}" class="text-light">
             <i class="bi bi-arrow-right-circle fs-3"></i>
           </a>
           <div class="project-year" style="color:#999;">2025</div>

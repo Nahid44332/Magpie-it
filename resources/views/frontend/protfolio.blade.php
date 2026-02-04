@@ -30,7 +30,7 @@
                       <a href="{{asset('frontend/assets/img/portfolio/portfolio-7.webp')}}" class="glightbox action-btn preview-btn" title="Preview Project">
                         <i class="bi bi-eye"></i>
                       </a>
-                      <a href="portfolio-details.html" class="action-btn details-btn" title="View Details">
+                      <a href="{{url('/protfolio-details')}}" class="action-btn details-btn" title="View Details">
                         <i class="bi bi-arrow-up-right"></i>
                       </a>
                     </div>
@@ -64,7 +64,7 @@
                       <a href="{{asset('frontend/assets/img/portfolio/portfolio-8.webp')}}" class="glightbox action-btn preview-btn" title="Preview Project">
                         <i class="bi bi-eye"></i>
                       </a>
-                      <a href="portfolio-details.html" class="action-btn details-btn" title="View Details">
+                      <a href="{{url('/protfolio-details')}}" class="action-btn details-btn" title="View Details">
                         <i class="bi bi-arrow-up-right"></i>
                       </a>
                     </div>
@@ -98,7 +98,7 @@
                       <a href="{{asset('frontend/assets/img/portfolio/portfolio-9.webp')}}" class="glightbox action-btn preview-btn" title="Preview Project">
                         <i class="bi bi-eye"></i>
                       </a>
-                      <a href="portfolio-details.html" class="action-btn details-btn" title="View Details">
+                      <a href="{{url('/protfolio-details')}}" class="action-btn details-btn" title="View Details">
                         <i class="bi bi-arrow-up-right"></i>
                       </a>
                     </div>
@@ -132,7 +132,7 @@
                       <a href="{{asset('frontend/assets/img/portfolio/portfolio-10.webp')}}" class="glightbox action-btn preview-btn" title="Preview Project">
                         <i class="bi bi-eye"></i>
                       </a>
-                      <a href="portfolio-details.html" class="action-btn details-btn" title="View Details">
+                      <a href="{{url('/protfolio-details')}}" class="action-btn details-btn" title="View Details">
                         <i class="bi bi-arrow-up-right"></i>
                       </a>
                     </div>
@@ -166,7 +166,7 @@
                       <a href="{{asset('frontend/assets/img/portfolio/portfolio-11.webp')}}" class="glightbox action-btn preview-btn" title="Preview Project">
                         <i class="bi bi-eye"></i>
                       </a>
-                      <a href="portfolio-details.html" class="action-btn details-btn" title="View Details">
+                      <a href="{{url('/protfolio-details')}}" class="action-btn details-btn" title="View Details">
                         <i class="bi bi-arrow-up-right"></i>
                       </a>
                     </div>
@@ -200,7 +200,7 @@
                       <a href="{{asset('frontend/assets/img/portfolio/portfolio-12.webp')}}" class="glightbox action-btn preview-btn" title="Preview Project">
                         <i class="bi bi-eye"></i>
                       </a>
-                      <a href="portfolio-details.html" class="action-btn details-btn" title="View Details">
+                      <a href="{{url('/protfolio-details')}}" class="action-btn details-btn" title="View Details">
                         <i class="bi bi-arrow-up-right"></i>
                       </a>
                     </div>

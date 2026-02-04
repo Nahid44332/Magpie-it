@@ -26,7 +26,7 @@
             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
           </ul><br>
 
-          <a href="#" class="btn order-btn">Order</a>
+          <a href="{{url('/order')}}" class="btn order-btn">Order</a>
           <div class="delivery">
             <span>🚀 2 Days Delivery</span>
             <span>💎 Unlimited Revision</span>
@@ -52,7 +52,7 @@
             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
           </ul><br>
 
-          <a href="#" class="btn order-btn">Order</a>
+          <a href="{{url('/order')}}" class="btn order-btn">Order</a>
           <div class="delivery">
             <span>🚀 3 Days Delivery</span>
             <span>💎 Unlimited Revision</span>
@@ -78,7 +78,7 @@
             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
           </ul><br>
 
-          <a href="#" class="btn order-btn">Order</a>
+          <a href="{{url('/order')}}" class="btn order-btn">Order</a>
           <div class="delivery">
             <span>🚀 5 Days Delivery</span>
             <span>💎 Unlimited Revision</span>
