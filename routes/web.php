@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\admincontroller;
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,10 @@ Route::get('/blog-details', [FrontendController::class, 'blogDetails']);
 Route::get('/pricing', [FrontendController::class, 'pricing']);
 Route::get('/contact', [FrontendController::class, 'contact']);
 Route::get('/order', [FrontendController::class, 'order']);
+
+//admin Login
+Route::get('/admin/login', [AdminAuthController::class, 'AdminLogin']);
+Route::get('/admin/logout', [AdminAuthController::class, 'AdminLogout']);
+Auth::routes();
+
+Route::get('/admin/dashboard', [admincontroller::class, 'adminDashboard']);

@@ -187,11 +187,11 @@
                         <div class="service-icon">
                             <i class="bi bi-palette"></i>
                         </div>
-                        <h4><a href="service-details.html">Brand Identity Design</a></h4>
+                        <h4><a href="{{url('/service-details')}}">Brand Identity Design</a></h4>
                         <p>Donec vel sapien augue integer urna vel turpis cursus porta aliquam ligula eget ultricies.
                         </p>
 
-                        <a href="service-details.html" class="service-link">
+                        <a href="{{url('/service-details')}}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -203,9 +203,9 @@
                         <div class="service-icon">
                             <i class="bi bi-layout-text-window-reverse"></i>
                         </div>
-                        <h4><a href="service-details.html">UI/UX Design</a></h4>
+                        <h4><a href="{{url('/service-details')}}">UI/UX Design</a></h4>
                         <p>Mauris blandit aliquet elit eget tincidunt nibh pulvinar rutrum tellus pellentesque eu.</p>
-                        <a href="service-details.html" class="service-link">
+                        <a href="{{url('/service-details')}}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -217,9 +217,9 @@
                         <div class="service-icon">
                             <i class="bi bi-code-slash"></i>
                         </div>
-                        <h4><a href="service-details.html">Web Development</a></h4>
+                        <h4><a href="{{url('/service-details')}}">Web Development</a></h4>
                         <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-                        <a href="service-details.html" class="service-link">
+                        <a href="{{url('/service-details')}}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -231,9 +231,9 @@
                         <div class="service-icon">
                             <i class="bi bi-phone"></i>
                         </div>
-                        <h4><a href="service-details.html">Mobile App Design</a></h4>
+                        <h4><a href="{{url('/service-details')}}">Mobile App Design</a></h4>
                         <p>Nulla facilisi morbi tempus iaculis urna id volutpat lacus laoreet non curabitur gravida.</p>
-                        <a href="service-details.html" class="service-link">
+                        <a href="{{url('/service-details')}}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -245,9 +245,9 @@
                         <div class="service-icon">
                             <i class="bi bi-megaphone"></i>
                         </div>
-                        <h4><a href="service-details.html">Digital Marketing</a></h4>
+                        <h4><a href="{{url('/service-details')}}">Digital Marketing</a></h4>
                         <p>Sed porttitor lectus nibh donec sollicitudin molestie malesuada proin eget tortor risus.</p>
-                        <a href="service-details.html" class="service-link">
+                        <a href="{{url('/service-details')}}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -259,10 +259,10 @@
                         <div class="service-icon">
                             <i class="bi bi-search"></i>
                         </div>
-                        <h4><a href="service-details.html">SEO Optimization</a></h4>
+                        <h4><a href="{{url('/service-details')}}">SEO Optimization</a></h4>
                         <p>Curabitur arcu erat accumsan id imperdiet et porttitor at sem pellentesque habitant morbi.
                         </p>
-                        <a href="service-details.html" class="service-link">
+                        <a href="{{url('/service-details')}}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -276,7 +276,7 @@
                     <div class="services-cta">
                         <h3>Ready to Transform Your Digital Presence?</h3>
                         <p>Let's discuss your project and create something amazing together</p>
-                        <a href="service-details.html" class="btn btn-primary">Get Started Today</a>
+                        <a href="{{url('/service-details')}}" class="btn btn-primary">Get Started Today</a>
                     </div>
                 </div>
             </div>
@@ -317,7 +317,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="portfolio-details.html" class="action-btn details-btn"
+                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -355,7 +355,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="portfolio-details.html" class="action-btn details-btn"
+                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -393,7 +393,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="portfolio-details.html" class="action-btn details-btn"
+                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -431,7 +431,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="portfolio-details.html" class="action-btn details-btn"
+                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -469,7 +469,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="portfolio-details.html" class="action-btn details-btn"
+                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -507,7 +507,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="portfolio-details.html" class="action-btn details-btn"
+                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -1244,7 +1244,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="blog-details.html" class="text-light">
+                                    <a href="{{url('/blog-details')}}" class="text-light">
                                         <i class="bi bi-arrow-right-circle fs-3"></i>
                                     </a>
                                     <div class="project-year" style="color:#999;">2025</div>
@@ -1274,7 +1274,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="blog-details.html" class="text-light">
+                                    <a href="{{url('/blog-details')}}" class="text-light">
                                         <i class="bi bi-arrow-right-circle fs-3"></i>
                                     </a>
                                     <div class="project-year" style="color:#999;">2025</div>
@@ -1304,7 +1304,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="blog-details.html" class="text-light">
+                                    <a href="{{url('/blog-details')}}" class="text-light">
                                         <i class="bi bi-arrow-right-circle fs-3"></i>
                                     </a>
                                     <div class="project-year" style="color:#999;">2025</div>
@@ -1348,7 +1348,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
                         </ul><br>
 
-                        <a href="#" class="btn order-btn">Order</a>
+                        <a href="{{url('/order')}}" class="btn order-btn">Order</a>
                         <div class="delivery">
                             <span>🚀 2 Days Delivery</span>
                             <span>💎 Unlimited Revision</span>
@@ -1375,7 +1375,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
                         </ul><br>
 
-                        <a href="#" class="btn order-btn">Order</a>
+                        <a href="{{url('/order')}}" class="btn order-btn">Order</a>
                         <div class="delivery">
                             <span>🚀 3 Days Delivery</span>
                             <span>💎 Unlimited Revision</span>
@@ -1402,7 +1402,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
                         </ul><br>
 
-                        <a href="#" class="btn order-btn">Order</a>
+                        <a href="{{url('/order')}}" class="btn order-btn">Order</a>
                         <div class="delivery">
                             <span>🚀 5 Days Delivery</span>
                             <span>💎 Unlimited Revision</span>
