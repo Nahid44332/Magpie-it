@@ -4,7 +4,6 @@
     <section id="hero" class="hero section">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-
                 <!-- Slide 1 -->
                 <div class="carousel-item active">
                     <div class="container">
@@ -59,6 +58,23 @@
                                         <a href="#" class="btn btn-primary">Get Started</a>
                                         <a href="#" class="btn btn-outline">Our Work</a>
                                     </div>
+                                      <div class="hero-stats">
+                                        <div class="stat-item">
+                                            <span class="stat-number purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="150" data-purecounter-duration="1"></span>
+                                            <span class="stat-label">Projects Completed</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-number purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="95" data-purecounter-duration="1"></span>
+                                            <span class="stat-label">Client Satisfaction</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-number purecounter" data-purecounter-start="0"
+                                                data-purecounter-end="24" data-purecounter-duration="1"></span>
+                                            <span class="stat-label">Team Members</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6" data-aos="fade-left">
@@ -83,6 +99,7 @@
                                         <a href="#" class="btn btn-primary">Get Started</a>
                                         <a href="#" class="btn btn-outline">Our Work</a>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div class="col-lg-6" data-aos="fade-left">
@@ -94,7 +111,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <!-- Carousel Controls -->

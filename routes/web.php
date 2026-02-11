@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\admin\admincontroller;
+use App\Http\Controllers\backend\admincontroller;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\backend\bannercontroller;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,10 @@ Route::get('/admin/logout', [AdminAuthController::class, 'AdminLogout']);
 Auth::routes();
 
 Route::get('/admin/dashboard', [admincontroller::class, 'adminDashboard']);
+
+//Banner Route Start....
+Route::get('/admin/banner', [bannercontroller::class, 'banner']);
+Route::post('/admin/banner/store', [bannercontroller::class, 'store']);
+Route::get('/banner/{id}/edit', [bannercontroller::class, 'edit'])->name('banner.edit');
+Route::put('/admin/banner/update/{id}', [bannercontroller::class, 'update'])->name('banner.update');
+Route::delete('/admin/banner/delete/{id}', [BannerController::class, 'destroy'])->name('banner.destroy');

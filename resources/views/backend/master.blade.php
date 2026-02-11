@@ -44,6 +44,8 @@
     </main>
 
     @include('backend.include.script')
+
+    @stack('script');
 </body>
 
 </html>
