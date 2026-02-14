@@ -1,116 +1,54 @@
 @extends('frontend.master')
 @section('content')
-  <!-- Hero Section as Full Div Carousel -->
+    <!-- Hero Section as Full Div Carousel -->
     <section id="hero" class="hero section">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <!-- Slide 1 -->
-                <div class="carousel-item active">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6" data-aos="fade-right">
-                                <div class="hero-content">
-                                    <h1>Transform Your Digital Presence</h1>
-                                    <p>We create innovative digital solutions that drive growth and elevate your brand.
-                                    </p>
-                                    <div class="hero-buttons">
-                                        <a href="#" class="btn btn-primary">Get Started</a>
-                                        <a href="#" class="btn btn-outline">Our Work</a>
-                                    </div>
-                                    <div class="hero-stats">
-                                        <div class="stat-item">
-                                            <span class="stat-number purecounter" data-purecounter-start="0"
-                                                data-purecounter-end="150" data-purecounter-duration="1"></span>
-                                            <span class="stat-label">Projects Completed</span>
+                @foreach ($banners as $key => $banner)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6" data-aos="fade-right">
+                                    <div class="hero-content">
+                                        <h1>{{ $banner->title }}</h1>
+                                        <p>{{ $banner->subtitle }}</p>
+                                        <div class="hero-buttons">
+                                            <a href="#" class="btn btn-primary">Get Started</a>
+                                            <a href="#" class="btn btn-outline">Our Work</a>
                                         </div>
-                                        <div class="stat-item">
-                                            <span class="stat-number purecounter" data-purecounter-start="0"
-                                                data-purecounter-end="95" data-purecounter-duration="1"></span>
-                                            <span class="stat-label">Client Satisfaction</span>
-                                        </div>
-                                        <div class="stat-item">
-                                            <span class="stat-number purecounter" data-purecounter-start="0"
-                                                data-purecounter-end="24" data-purecounter-duration="1"></span>
-                                            <span class="stat-label">Team Members</span>
+                                        <div class="hero-stats">
+                                            <div class="stat-item">
+                                                <span class="stat-number purecounter" data-purecounter-start="0"
+                                                    data-purecounter-end="{{ $banner->projects_completed }}"
+                                                    data-purecounter-duration="1"></span>
+                                                <span class="stat-label">Projects Completed</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-number purecounter" data-purecounter-start="0"
+                                                    data-purecounter-end="{{ $banner->client_satisfaction }}"
+                                                    data-purecounter-duration="1"></span>
+                                                <span class="stat-label">Client Satisfaction</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-number purecounter" data-purecounter-start="0"
+                                                    data-purecounter-end="{{ $banner->team_members }}"
+                                                    data-purecounter-duration="1"></span>
+                                                <span class="stat-label">Team Members</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6" data-aos="fade-left">
-                                <div class="hero-image">
-                                    <img src="{{ asset('frontend/assets/img/misc/misc-16.webp') }}" height="450"
-                                        width="700" alt="Slide 2">
+                                <div class="col-lg-6" data-aos="fade-left">
+                                    <div class="hero-image">
+                                        <img src="{{ asset('backend/images/banner/' . $banner->image) }}" height="450"
+                                            width="700" alt="Slide 2">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="carousel-item">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6" data-aos="fade-right">
-                                <div class="hero-content">
-                                    <h1>Innovative Web Solutions</h1>
-                                    <p>Delivering cutting-edge websites to help your business grow faster.</p>
-                                    <div class="hero-buttons mt-5">
-                                        <a href="#" class="btn btn-primary">Get Started</a>
-                                        <a href="#" class="btn btn-outline">Our Work</a>
-                                    </div>
-                                      <div class="hero-stats">
-                                        <div class="stat-item">
-                                            <span class="stat-number purecounter" data-purecounter-start="0"
-                                                data-purecounter-end="150" data-purecounter-duration="1"></span>
-                                            <span class="stat-label">Projects Completed</span>
-                                        </div>
-                                        <div class="stat-item">
-                                            <span class="stat-number purecounter" data-purecounter-start="0"
-                                                data-purecounter-end="95" data-purecounter-duration="1"></span>
-                                            <span class="stat-label">Client Satisfaction</span>
-                                        </div>
-                                        <div class="stat-item">
-                                            <span class="stat-number purecounter" data-purecounter-start="0"
-                                                data-purecounter-end="24" data-purecounter-duration="1"></span>
-                                            <span class="stat-label">Team Members</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6" data-aos="fade-left">
-                                <div class="hero-image">
-                                    <img src="{{ asset('frontend/assets/img/misc/misc-17.webp') }}" height="450"
-                                        width="700" alt="Slide 2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="carousel-item">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6" data-aos="fade-right">
-                                <div class="hero-content">
-                                    <h1>Grow Your Digital Brand</h1>
-                                    <p>Helping brands achieve digital excellence with creative solutions.</p>
-                                    <div class="hero-buttons mt-5">
-                                        <a href="#" class="btn btn-primary">Get Started</a>
-                                        <a href="#" class="btn btn-outline">Our Work</a>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-lg-6" data-aos="fade-left">
-                                <div class="hero-image">
-                                    <img src="{{ asset('frontend/assets/img/misc/misc-18.webp') }}" height="450"
-                                        width="700" alt="Slide 2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <!-- Carousel Controls -->
@@ -118,8 +56,7 @@
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel"
-                data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
@@ -203,11 +140,11 @@
                         <div class="service-icon">
                             <i class="bi bi-palette"></i>
                         </div>
-                        <h4><a href="{{url('/service-details')}}">Brand Identity Design</a></h4>
+                        <h4><a href="{{ url('/service-details') }}">Brand Identity Design</a></h4>
                         <p>Donec vel sapien augue integer urna vel turpis cursus porta aliquam ligula eget ultricies.
                         </p>
 
-                        <a href="{{url('/service-details')}}" class="service-link">
+                        <a href="{{ url('/service-details') }}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -219,9 +156,9 @@
                         <div class="service-icon">
                             <i class="bi bi-layout-text-window-reverse"></i>
                         </div>
-                        <h4><a href="{{url('/service-details')}}">UI/UX Design</a></h4>
+                        <h4><a href="{{ url('/service-details') }}">UI/UX Design</a></h4>
                         <p>Mauris blandit aliquet elit eget tincidunt nibh pulvinar rutrum tellus pellentesque eu.</p>
-                        <a href="{{url('/service-details')}}" class="service-link">
+                        <a href="{{ url('/service-details') }}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -233,9 +170,9 @@
                         <div class="service-icon">
                             <i class="bi bi-code-slash"></i>
                         </div>
-                        <h4><a href="{{url('/service-details')}}">Web Development</a></h4>
+                        <h4><a href="{{ url('/service-details') }}">Web Development</a></h4>
                         <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-                        <a href="{{url('/service-details')}}" class="service-link">
+                        <a href="{{ url('/service-details') }}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -247,9 +184,9 @@
                         <div class="service-icon">
                             <i class="bi bi-phone"></i>
                         </div>
-                        <h4><a href="{{url('/service-details')}}">Mobile App Design</a></h4>
+                        <h4><a href="{{ url('/service-details') }}">Mobile App Design</a></h4>
                         <p>Nulla facilisi morbi tempus iaculis urna id volutpat lacus laoreet non curabitur gravida.</p>
-                        <a href="{{url('/service-details')}}" class="service-link">
+                        <a href="{{ url('/service-details') }}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -261,9 +198,9 @@
                         <div class="service-icon">
                             <i class="bi bi-megaphone"></i>
                         </div>
-                        <h4><a href="{{url('/service-details')}}">Digital Marketing</a></h4>
+                        <h4><a href="{{ url('/service-details') }}">Digital Marketing</a></h4>
                         <p>Sed porttitor lectus nibh donec sollicitudin molestie malesuada proin eget tortor risus.</p>
-                        <a href="{{url('/service-details')}}" class="service-link">
+                        <a href="{{ url('/service-details') }}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -275,10 +212,10 @@
                         <div class="service-icon">
                             <i class="bi bi-search"></i>
                         </div>
-                        <h4><a href="{{url('/service-details')}}">SEO Optimization</a></h4>
+                        <h4><a href="{{ url('/service-details') }}">SEO Optimization</a></h4>
                         <p>Curabitur arcu erat accumsan id imperdiet et porttitor at sem pellentesque habitant morbi.
                         </p>
-                        <a href="{{url('/service-details')}}" class="service-link">
+                        <a href="{{ url('/service-details') }}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -292,7 +229,7 @@
                     <div class="services-cta">
                         <h3>Ready to Transform Your Digital Presence?</h3>
                         <p>Let's discuss your project and create something amazing together</p>
-                        <a href="{{url('/service-details')}}" class="btn btn-primary">Get Started Today</a>
+                        <a href="{{ url('/service-details') }}" class="btn btn-primary">Get Started Today</a>
                     </div>
                 </div>
             </div>
@@ -333,7 +270,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
+                                        <a href="{{ url('/protfolio-details') }}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -371,7 +308,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
+                                        <a href="{{ url('/protfolio-details') }}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -409,7 +346,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
+                                        <a href="{{ url('/protfolio-details') }}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -447,7 +384,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
+                                        <a href="{{ url('/protfolio-details') }}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -485,7 +422,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
+                                        <a href="{{ url('/protfolio-details') }}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -523,7 +460,7 @@
                                             class="glightbox action-btn preview-btn" title="Preview Project">
                                             <i class="bi bi-eye"></i>
                                         </a>
-                                        <a href="{{url('/protfolio-details')}}" class="action-btn details-btn"
+                                        <a href="{{ url('/protfolio-details') }}" class="action-btn details-btn"
                                             title="View Details">
                                             <i class="bi bi-arrow-up-right"></i>
                                         </a>
@@ -974,8 +911,7 @@
                     <div class="team-grid" data-aos="fade-left" data-aos-delay="200">
                         <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="250">
                             <div class="hexagon-inner">
-                                <img src="{{ asset('frontend/assets/img/person/person-f-3.webp') }}"
-                                    alt="Team member">
+                                <img src="{{ asset('frontend/assets/img/person/person-f-3.webp') }}" alt="Team member">
                                 <div class="member-overlay">
                                     <h5>Sarah Chen</h5>
                                     <span>Creative Director</span>
@@ -989,8 +925,7 @@
 
                         <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="300">
                             <div class="hexagon-inner">
-                                <img src="{{ asset('frontend/assets/img/person/person-m-4.webp') }}"
-                                    alt="Team member">
+                                <img src="{{ asset('frontend/assets/img/person/person-m-4.webp') }}" alt="Team member">
                                 <div class="member-overlay">
                                     <h5>Marcus Johnson</h5>
                                     <span>Tech Lead</span>
@@ -1004,8 +939,7 @@
 
                         <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="350">
                             <div class="hexagon-inner">
-                                <img src="{{ asset('frontend/assets/img/person/person-f-8.webp') }}"
-                                    alt="Team member">
+                                <img src="{{ asset('frontend/assets/img/person/person-f-8.webp') }}" alt="Team member">
                                 <div class="member-overlay">
                                     <h5>Emma Rodriguez</h5>
                                     <span>Product Manager</span>
@@ -1019,8 +953,7 @@
 
                         <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="400">
                             <div class="hexagon-inner">
-                                <img src="{{ asset('frontend/assets/img/person/person-m-6.webp') }}"
-                                    alt="Team member">
+                                <img src="{{ asset('frontend/assets/img/person/person-m-6.webp') }}" alt="Team member">
                                 <div class="member-overlay">
                                     <h5>David Kim</h5>
                                     <span>UX Architect</span>
@@ -1244,8 +1177,8 @@
                 <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-creative">
                     <div class="portfolio-card">
                         <div class="portfolio-image-container">
-                            <img src="{{ asset('frontend/assets/img/portfolio/portfolio-11.webp') }}"
-                                alt="Blog Image" class="img-fluid" loading="lazy">
+                            <img src="{{ asset('frontend/assets/img/portfolio/portfolio-11.webp') }}" alt="Blog Image"
+                                class="img-fluid" loading="lazy">
                         </div>
 
                         <div class="portfolio-content p-3">
@@ -1260,7 +1193,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="{{url('/blog-details')}}" class="text-light">
+                                    <a href="{{ url('/blog-details') }}" class="text-light">
                                         <i class="bi bi-arrow-right-circle fs-3"></i>
                                     </a>
                                     <div class="project-year" style="color:#999;">2025</div>
@@ -1274,8 +1207,8 @@
                 <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-creative">
                     <div class="portfolio-card">
                         <div class="portfolio-image-container">
-                            <img src="{{ asset('frontend/assets/img/portfolio/portfolio-10.webp') }}"
-                                alt="Blog Image" class="img-fluid" loading="lazy">
+                            <img src="{{ asset('frontend/assets/img/portfolio/portfolio-10.webp') }}" alt="Blog Image"
+                                class="img-fluid" loading="lazy">
                         </div>
 
                         <div class="portfolio-content p-3">
@@ -1290,7 +1223,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="{{url('/blog-details')}}" class="text-light">
+                                    <a href="{{ url('/blog-details') }}" class="text-light">
                                         <i class="bi bi-arrow-right-circle fs-3"></i>
                                     </a>
                                     <div class="project-year" style="color:#999;">2025</div>
@@ -1304,8 +1237,8 @@
                 <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-creative">
                     <div class="portfolio-card">
                         <div class="portfolio-image-container">
-                            <img src="{{ asset('frontend/assets/img/portfolio/portfolio-12.webp') }}"
-                                alt="Blog Image" class="img-fluid" loading="lazy">
+                            <img src="{{ asset('frontend/assets/img/portfolio/portfolio-12.webp') }}" alt="Blog Image"
+                                class="img-fluid" loading="lazy">
                         </div>
 
                         <div class="portfolio-content p-3">
@@ -1320,7 +1253,7 @@
                                 </div>
 
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="{{url('/blog-details')}}" class="text-light">
+                                    <a href="{{ url('/blog-details') }}" class="text-light">
                                         <i class="bi bi-arrow-right-circle fs-3"></i>
                                     </a>
                                     <div class="project-year" style="color:#999;">2025</div>
@@ -1364,7 +1297,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
                         </ul><br>
 
-                        <a href="{{url('/order')}}" class="btn order-btn">Order</a>
+                        <a href="{{ url('/order') }}" class="btn order-btn">Order</a>
                         <div class="delivery">
                             <span>🚀 2 Days Delivery</span>
                             <span>💎 Unlimited Revision</span>
@@ -1391,7 +1324,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
                         </ul><br>
 
-                        <a href="{{url('/order')}}" class="btn order-btn">Order</a>
+                        <a href="{{ url('/order') }}" class="btn order-btn">Order</a>
                         <div class="delivery">
                             <span>🚀 3 Days Delivery</span>
                             <span>💎 Unlimited Revision</span>
@@ -1418,7 +1351,7 @@
                             <li><i class="bi bi-check-circle-fill"></i> Speed Optimized</li>
                         </ul><br>
 
-                        <a href="{{url('/order')}}" class="btn order-btn">Order</a>
+                        <a href="{{ url('/order') }}" class="btn order-btn">Order</a>
                         <div class="delivery">
                             <span>🚀 5 Days Delivery</span>
                             <span>💎 Unlimited Revision</span>
@@ -1455,8 +1388,8 @@
                         <form action="forms/contact.php" method="post" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <input type="text" name="name" class="form-control"
-                                        placeholder="Your Name" required="">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name"
+                                        required="">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <input type="email" class="form-control" name="email"
