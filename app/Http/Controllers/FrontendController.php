@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Banner;
+use App\Models\Whyus;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -10,13 +12,17 @@ class FrontendController extends Controller
     public function index()
     {
         $banners = Banner::get();
-        return view('frontend.index', compact('banners'));
+        $abouts = About::first();
+        $whyuses = Whyus::get();
+        return view('frontend.index', compact('banners', 'abouts', 'whyuses'));
     }
 
     public function about()
     {
-        return view('frontend.about');
-    }
+        $abouts = About::first();
+        $whyuses = Whyus::get();
+        return view('frontend.about', compact('abouts', 'whyuses'));
+    } 
 
     public function service()
     {

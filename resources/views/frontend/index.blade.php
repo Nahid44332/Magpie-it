@@ -74,43 +74,37 @@
                 <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
                     <div class="content">
                         <h6 class="subtitle">Discover Our Story</h6>
-                        <h2>Innovative Solutions for a Digital-First World</h2>
+                        <h2>{{ $abouts->title}}</h2>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.
+                            {{$abouts->description}}
                         </p>
 
-                        <ul class="features-list">
+                        {{-- <ul class="features-list">
                             <li><i class="bi bi-check-circle-fill"></i><span>Excepteur sint occaecat cupidatat non
                                     proident.</span></li>
                             <li><i class="bi bi-check-circle-fill"></i><span>Nemo enim ipsam voluptatem quia voluptas
                                     sit.</span></li>
                             <li><i class="bi bi-check-circle-fill"></i><span>Duis aute irure dolor in reprehenderit in
                                     voluptate velit.</span></li>
-                        </ul>
+                        </ul> --}}
 
-                        <a href="#" class="btn btn-primary">Discover More</a>
+                        <a href="{{url('/about')}}" class="btn btn-primary">Discover More</a>
                     </div>
                 </div>
 
                 <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
                     <div class="image-composition">
                         <div class="image-main">
-                            <img src="{{ asset('frontend/assets/img/about/about-9.webp') }}"
+                            <img src="{{ asset('backend/images/abouts/'.$abouts->image) }}"
                                 alt="Modern office with a team working" class="img-fluid" loading="lazy">
-                        </div>
-                        <div class="image-secondary">
-                            <img src="{{ asset('frontend/assets/img/about/about-square-8.webp') }}"
-                                alt="Collaborative discussion" class="img-fluid" loading="lazy">
                         </div>
                         <div class="stats-card">
                             <div class="stats-item">
-                                <h3>20+</h3>
+                                <h3>{{$abouts->years_of_expertise}}+</h3>
                                 <p>Years of Expertise</p>
                             </div>
                             <div class="stats-item">
-                                <h3>500+</h3>
+                                <h3>{{$abouts->happy_client}}+</h3>
                                 <p>Happy Clients</p>
                             </div>
                         </div>
@@ -516,53 +510,22 @@
 
             <div class="row g-4">
 
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                @foreach ($whyuses as $whyus)
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="feature-card">
                         <div class="icon-wrapper">
-                            <i class="bi bi-palette-fill"></i>
+                            <i class="{{$whyus->icon}}"></i>
                         </div>
-                        <h4>Creative Excellence</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua ut enim ad minim veniam.</p>
+                        <h4>{{$whyus->title}}</h4>
+                        <p>{{$whyus->description}}</p>
                         <div class="feature-stats">
                             <span class="stat-number" data-purecounter-start="0" data-purecounter-end="95"
-                                data-purecounter-duration="2">95</span>
-                            <span class="stat-label">% Client Satisfaction</span>
+                                data-purecounter-duration="2">{{$whyus->count}}</span>
+                            <span class="stat-label">{{$whyus->count_title}}</span>
                         </div>
                     </div>
                 </div><!-- End Feature Card -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-card">
-                        <div class="icon-wrapper">
-                            <i class="bi bi-graph-up-arrow"></i>
-                        </div>
-                        <h4>Proven Results</h4>
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat duis aute irure dolor in reprehenderit.</p>
-                        <div class="feature-stats">
-                            <span class="stat-number" data-purecounter-start="0" data-purecounter-end="200"
-                                data-purecounter-duration="2">200</span>
-                            <span class="stat-label">% ROI Increase</span>
-                        </div>
-                    </div>
-                </div><!-- End Feature Card -->
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-card">
-                        <div class="icon-wrapper">
-                            <i class="bi bi-award-fill"></i>
-                        </div>
-                        <h4>Expert Team</h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum sed ut perspiciatis unde omnis.</p>
-                        <div class="feature-stats">
-                            <span class="stat-number" data-purecounter-start="0" data-purecounter-end="50"
-                                data-purecounter-duration="2">50</span>
-                            <span class="stat-label">+ Awards Won</span>
-                        </div>
-                    </div>
-                </div><!-- End Feature Card -->
+                @endforeach
 
             </div>
 

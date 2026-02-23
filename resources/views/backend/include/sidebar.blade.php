@@ -6,9 +6,10 @@
   <ul class="menu">
     <li><a class="active" href="dashboard.html"><i class="bi bi-house-door"></i> Dashboard</a></li>
     <li><a href="{{url('/admin/banner')}}"><i class="bi bi-book"></i> Banner</a></li>
+    <li><a href="{{url('/admin/about')}}"><i class="bi bi-person"></i>About</a></li>
+    <li><a href="{{url('/admin/team')}}"><i class="bi bi-people"></i> Team</a></li>
     <li><a href="profile.html"><i class="bi bi-person"></i> Profile</a></li>
     <li><a href="message.html"><i class="bi bi-telephone"></i> Message</a></li>
-    <li><a href="teams.html"><i class="bi bi-people"></i> Team</a></li>
     <li><a href="project.html"><i class="bi bi-folder"></i> Projects</a></li>
     <li><a href="services.html"><i class="bi bi-check2-square"></i> Service</a></li>
     <li><a href="calender.html"><i class="bi bi-calendar"></i> Calendar</a></li>

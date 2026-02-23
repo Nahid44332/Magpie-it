@@ -54,14 +54,11 @@ class bannercontroller extends Controller
         $banner->client_satisfaction = $request->client_satisfaction;
         $banner->team_members = $request->team_members;
 
-        // যদি নতুন ইমেজ আপলোড করা হয়
         if ($request->hasFile('image')) {
-            // পুরানো ইমেজ ডিলিট করা
             if ($banner->image && file_exists(public_path('backend/images/banner/' . $banner->image))) {
                 unlink(public_path('backend/images/banner/' . $banner->image));
             }
 
-            // নতুন ইমেজ আপলোড করা
             $imageName = rand() . '-banner.' . $request->image->extension();
             $request->image->move(public_path('backend/images/banner/'), $imageName);
             $banner->image = $imageName;

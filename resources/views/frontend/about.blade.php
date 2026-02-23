@@ -133,9 +133,8 @@
       <div class="row gy-5 align-items-center">
         <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
           <h1 class="subtitle text-muted h1 ">Discover Our Story</h1>
-          <h3 class="h3 mt-3">Innovative Solutions for a Digital-First World</h3>
-          <p class="mt-3">We craft digital experiences that transform brands and grow businesses. With years of
-            experience in design, development, and strategy — we deliver innovation that truly matters.</p>
+          <h3 class="h3 mt-3">{{$abouts->title}}</h3>
+          <p class="mt-3">{{$abouts->description}}</p>
           <ul class="features-list">
             <li><i class="bi bi-check-circle-fill text-primary"></i> Creative & strategic digital solutions</li>
             <li><i class="bi bi-check-circle-fill text-primary"></i> Expert team of designers & developers</li>
@@ -144,7 +143,7 @@
           <a href="#services" class="order-btn mt-3">Discover More</a>
         </div>
         <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
-          <img src="{{asset('frontend/assets/img/about/about-9.webp')}}" class="img-fluid rounded-4 shadow" alt="About Magpie IT">
+          <img src="{{asset('backend/images/abouts/'.$abouts->image)}}" class="img-fluid rounded-4 shadow" alt="About Magpie IT">
         </div>
       </div>
     </div>
@@ -165,54 +164,22 @@
 
       <div class="row g-4">
 
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        @foreach ($whyuses as $whyus)
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="feature-card">
             <div class="icon-wrapper">
-              <i class="bi bi-palette-fill"></i>
+              <i class="{{$whyus->icon}}"></i>
             </div>
-            <h4>Creative Excellence</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua ut enim ad minim veniam.</p>
+            <h4>{{$whyus->title}}</h4>
+            <p>{{$whyus->description}}</p>
             <div class="feature-stats">
               <span class="stat-number" data-purecounter-start="0" data-purecounter-end="95"
-                data-purecounter-duration="2">95</span>
-              <span class="stat-label">% Client Satisfaction</span>
+                data-purecounter-duration="2">{{$whyus->count}}</span>
+              <span class="stat-label">{{$whyus->count_title}}</span>
             </div>
           </div>
         </div><!-- End Feature Card -->
-
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="feature-card">
-            <div class="icon-wrapper">
-              <i class="bi bi-graph-up-arrow"></i>
-            </div>
-            <h4>Proven Results</h4>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat duis aute irure dolor in reprehenderit.</p>
-            <div class="feature-stats">
-              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="200"
-                data-purecounter-duration="2">200</span>
-              <span class="stat-label">% ROI Increase</span>
-            </div>
-          </div>
-        </div><!-- End Feature Card -->
-
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-          <div class="feature-card">
-            <div class="icon-wrapper">
-              <i class="bi bi-award-fill"></i>
-            </div>
-            <h4>Expert Team</h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-              laborum sed ut perspiciatis unde omnis.</p>
-            <div class="feature-stats">
-              <span class="stat-number" data-purecounter-start="0" data-purecounter-end="50"
-                data-purecounter-duration="2">50</span>
-              <span class="stat-label">+ Awards Won</span>
-            </div>
-          </div>
-        </div><!-- End Feature Card -->
-
+        @endforeach
       </div>
 
       <div class="row mt-5">

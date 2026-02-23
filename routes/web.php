@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\backend\admincontroller;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\backend\AboutController;
 use App\Http\Controllers\backend\bannercontroller;
+use App\Http\Controllers\backend\TeamController;
 use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,4 +36,19 @@ Route::get('/admin/banner', [bannercontroller::class, 'banner']);
 Route::post('/admin/banner/store', [bannercontroller::class, 'store']);
 Route::get('/banner/{id}/edit', [bannercontroller::class, 'edit'])->name('banner.edit');
 Route::put('/admin/banner/update/{id}', [bannercontroller::class, 'update'])->name('banner.update');
-Route::delete('/admin/banner/delete/{id}', [BannerController::class, 'destroy'])->name('banner.destroy');
+Route::delete('/admin/banner/delete/{id}', [bannerController::class, 'destroy'])->name('banner.destroy');
+//Banner Route End...
+
+//About Route Start...
+Route::get('/admin/about', [AboutController::class, 'about']);
+Route::post('/admin/about/update', [AboutController::class, 'update']);
+Route::post('/admin/whyus/store', [AboutController::class, 'store'])->name('whyuse.store');
+Route::post('/admin/whyus/update/{id}', [AboutController::class, 'whysUpdate']);
+Route::delete('/admin/whyus/delete/{id}', [AboutController::class, 'delete']);
+#about Route End...
+
+#team Route Start...
+Route::get('/admin/team', [TeamController::class, 'team']);
+Route::post('/admin/team-intro/update', [TeamController::class, 'teamIntroUpdate']);
+Route::post('/admin/team-leader/store', [TeamController::class, 'teamLeaderStore']);
+Route::post('/admin/team-leader/update/{id}', [TeamController::class, 'teamLeaderUpdate']);
