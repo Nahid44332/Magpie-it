@@ -538,8 +538,8 @@
         }
 
         /* =========================
-               GLOBAL RESPONSIVE FIX
-            ========================= */
+                               GLOBAL RESPONSIVE FIX
+                            ========================= */
         img,
         canvas {
             max-width: 100%;
@@ -547,8 +547,8 @@
         }
 
         /* =========================
-               MAIN CONTENT RESPONSIVE
-            ========================= */
+                               MAIN CONTENT RESPONSIVE
+                            ========================= */
         @media (max-width: 992px) {
             .main {
                 padding: 20px;
@@ -556,8 +556,8 @@
         }
 
         /* =========================
-               NAVBAR FIX
-            ========================= */
+                               NAVBAR FIX
+                            ========================= */
         @media (max-width: 576px) {
             .navbar-top {
                 flex-direction: column;
@@ -567,8 +567,8 @@
         }
 
         /* =========================
-               SIDEBAR MOBILE SAFE
-            ========================= */
+                               SIDEBAR MOBILE SAFE
+                            ========================= */
         @media (max-width: 768px) {
             .sidebar {
                 width: 240px;
@@ -672,23 +672,26 @@
                 <tbody>
                     @foreach ($teamleaders as $leader)
                         <tr>
-                        <td><img src="{{asset('backend/images/teamleader/'.$leader->image)}}" alt="Leader Photo"></td>
-                        <td>{{$leader->name}}</td>
-                        <td>{{$leader->position}}</td>
-                        <td>{{$leader->email}}</td>
-                        <td>
-                            <a href="{{$leader->linkedin}}"><i class="bi bi-linkedin text-light"></i></a>
-                            <a href="{{$leader->twitter}}"><i class="bi bi-twitter text-light"></i></a>
-                            <a href="{{$leader->instagram}}"><i class="bi bi-instagram text-light"></i></a>
-                            <a href="{{$leader->github}}"><i class="bi bi-github text-light"></i></a>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
-                                data-bs-target="#editLeaderModal"><i class="bi bi-pencil"></i> Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                data-bs-target="#deleteLeaderModal"><i class="bi bi-trash"></i> Delete</button>
-                        </td>
-                    </tr>
+                            <td><img src="{{ asset('backend/images/teamleader/' . $leader->image) }}" alt="Leader Photo">
+                            </td>
+                            <td>{{ $leader->name }}</td>
+                            <td>{{ $leader->position }}</td>
+                            <td>{{ $leader->email }}</td>
+                            <td>
+                                <a href="{{ $leader->linkedin }}"><i class="bi bi-linkedin text-light"></i></a>
+                                <a href="{{ $leader->twitter }}"><i class="bi bi-twitter text-light"></i></a>
+                                <a href="{{ $leader->instagram }}"><i class="bi bi-instagram text-light"></i></a>
+                                <a href="{{ $leader->github }}"><i class="bi bi-github text-light"></i></a>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editLeaderModal{{ $leader->id }}">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteLeaderModal"><i class="bi bi-trash"></i> Delete</button>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -715,22 +718,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><img src="assets/img/person/person-f-3.webp" alt="Sarah Chen"></td>
-                        <td>Sarah Chen</td>
-                        <td>Creative Director</td>
-                        <td>sarah@magpieit.com</td>
-                        <td>
-                            <a href="#"><i class="bi bi-linkedin text-light"></i></a>
-                            <a href="#"><i class="bi bi-twitter text-light"></i></a>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
-                                data-bs-target="#editModal"><i class="bi bi-pencil"></i> Edit</button>
-                            <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal"><i class="bi bi-trash"></i> Delete</button>
-                        </td>
-                    </tr>
+                    @foreach ($teammembers as $teammember)
+                        <tr>
+                            <td><img src="{{ asset('backend/images/teammember/' . $teammember->image) }}" alt="Sarah Chen">
+                            </td>
+                            <td>{{ $teammember->name }}</td>
+                            <td>{{ $teammember->position }}</td>
+                            <td>{{ $teammember->email }}</td>
+                            <td>
+                                <a href="{{ $teammember->facebook }}"><i class="bi bi-facebook text-light"></i></a>
+                                <a href="{{ $teammember->instagram }}"><i class="bi bi-instagram text-light"></i></a>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editMemberModal{{ $teammember->id }}">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal"><i class="bi bi-trash"></i> Delete</button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -799,62 +807,89 @@
     </div>
 
     <!-- Edit Leader Modal -->
-    <div class="modal fade mt-5" id="editLeaderModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content"> 
-                <div class="modal-header">
-                    <h5>Edit Leader</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                                <input type="text" class="form-control" name="name" value="joun don">
+    @foreach ($teamleaders as $leader)
+        <div class="modal fade mt-5" id="editLeaderModal{{ $leader->id }}" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Edit Leader</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ url('/admin/team-leader/update/' . $leader->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="name"
+                                        value="{{ $leader->name }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Position</label>
+                                    <input type="text" class="form-control" name="position"
+                                        value="{{ $leader->position }}">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Bio</label>
+                                    <input type="text" class="form-control" name="bio"
+                                        value="{{ $leader->bio }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="email"
+                                        value="{{ $leader->email }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Current Photo</label><br>
+                                    <img src="{{ asset('backend/images/teamleader/' . $leader->image) }}" width="80">
+                                    <input type="file" name="image" class="form-control mt-2">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>LinkedIn</label>
+                                    <input type="url" class="form-control" name="linkedin"
+                                        value="{{ $leader->linkedin }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Twitter</label>
+                                    <input type="url" class="form-control" name="twitter"
+                                        value="{{ $leader->twitter }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Instagram</label>
+                                    <input type="url" class="form-control" name="instagram"
+                                        value="{{ $leader->instagram }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>GitHub</label>
+                                    <input type="url" class="form-control" name="github"
+                                        value="{{ $leader->github }}">
+                                </div>
+
                             </div>
-                            <div class="col-md-6">
-                                <label>Position</label>
-                                <input type="text" class="form-control" name="position" value="Team Leader">
+
+                            <div class="modal-footer border-0">
+                                <button type="submit" class="btn btn-custom">
+                                    Save Changes
+                                </button>
                             </div>
-                            <div class="col-md-12">
-                                <label>Bio</label>
-                                <input type="text" class="form-control" name="bio" value="I am a developer">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Email</label>
-                                <input type="email" class="form-control" name="email" value="john@team.com">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Photo</label>
-                                <img src="" alt="">
-                                <input type="file" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label>LinkedIn</label>
-                                <input type="url" class="form-control" name="linkedin" placeholder="https://linkedin.com/...">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Twitter</label>
-                                <input type="url" class="form-control" name="twitter" placeholder="https://twitter.com/...">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Instagram</label>
-                                <input type="url" class="form-control" name="instagram" placeholder="https://instagram.com/...">
-                            </div>
-                            <div class="col-md-6">
-                                <label>GitHub</label>
-                                <input type="url" class="form-control" name="github" placeholder="https://github.com/...">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-custom">Save Changes</button>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
 
     <!-- Delete Leader Modal -->
     <div class="modal fade mt-5" id="deleteLeaderModal" tabindex="-1">
@@ -865,11 +900,14 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <p>Are you sure you want to delete <strong>John Doe</strong>?</p>
+                    <p>Are you sure you want to delete</p>
                 </div>
                 <div class="modal-footer border-0 justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-custom">Delete</button>
+                    <a href="{{ url('/admin/team-leader/delete/' . $leader->id) }}" class="btn btn-sm btn-outline-danger"
+                        onclick="return confirm('Are you sure?')">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
                 </div>
             </div>
         </div>
@@ -885,80 +923,107 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{{ url('/admin/team-member/store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Enter name">
+                                <input type="text" class="form-control" name="name" placeholder="Enter name">
                             </div>
                             <div class="col-md-6">
                                 <label>Position</label>
-                                <input type="text" class="form-control" placeholder="Enter position">
+                                <input type="text" class="form-control" name="position" placeholder="Enter position">
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label>Photo</label>
-                                <input type="file" class="form-control">
+                                <input type="file" name="image" class="form-control">
                             </div>
                             <div class="col-md-6">
-                                <label>LinkedIn</label>
-                                <input type="url" class="form-control" placeholder="https://linkedin.com/...">
+                                <label>email</label>
+                                <input type="text" name="email" class="form-control">
                             </div>
                             <div class="col-md-6">
-                                <label>Twitter</label>
-                                <input type="url" class="form-control" placeholder="https://twitter.com/...">
+                                <label>Facebook</label>
+                                <input type="url" class="form-control" name="facebook"
+                                    placeholder="https://facebook.com/...">
                             </div>
-
+                            <div class="col-md-6">
+                                <label>Instagram</label>
+                                <input type="url" class="form-control" name="instagram"
+                                    placeholder="https://instagram.com/...">
+                            </div>
+                            <div class="modal-footer border-0">
+                                <button type="submit" class="btn btn-custom px-4">Save Member</button>
+                            </div>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-custom px-4">Save Member</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Edit Member Modal -->
-    <div class="modal fade mt-5" id="editModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Edit Team Member</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                                <input type="text" class="form-control" value="Sarah Chen">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Position</label>
-                                <input type="text" class="form-control" value="Creative Director">
+    @foreach ($teammembers as $member)
+        <div class="modal fade mt-5" id="editMemberModal{{ $member->id }}" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Edit Team Member</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form action="{{ url('/admin/team-member/update/' . $member->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                    <input type="text" name="name" class="form-control"
+                                        value="{{ $member->name }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Position</label>
+                                    <input type="text" name="position" class="form-control"
+                                        value="{{ $member->position }}">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Current Photo</label><br>
+                                    <img src="{{ asset('backend/images/teammember/' . $member->image) }}" width="80"
+                                        class="mb-2">
+                                    <input type="file" name="image" class="form-control">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Facebook</label>
+                                    <input type="url" name="facebook" class="form-control"
+                                        value="{{ $member->facebook }}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Instagram</label>
+                                    <input type="url" name="instagram" class="form-control"
+                                        value="{{ $member->instagram }}">
+                                </div>
+
                             </div>
 
-                            <div class="col-md-12">
-                                <label>Photo</label>
-                                <input type="file" class="form-control">
+                            <div class="modal-footer border-0">
+                                <button type="submit" class="btn btn-custom px-4">
+                                    Save Changes
+                                </button>
                             </div>
-                            <div class="col-md-6">
-                                <label>LinkedIn</label>
-                                <input type="url" class="form-control" value="https://linkedin.com/sarah">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Twitter</label>
-                                <input type="url" class="form-control" value="https://twitter.com/sarah">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-custom px-4">Save Changes</button>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
 
     <!-- Delete Member Modal -->
     <div class="modal fade mt-5" id="deleteModal" tabindex="-1">

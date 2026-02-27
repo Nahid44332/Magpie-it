@@ -52,3 +52,6 @@ Route::get('/admin/team', [TeamController::class, 'team']);
 Route::post('/admin/team-intro/update', [TeamController::class, 'teamIntroUpdate']);
 Route::post('/admin/team-leader/store', [TeamController::class, 'teamLeaderStore']);
 Route::post('/admin/team-leader/update/{id}', [TeamController::class, 'teamLeaderUpdate']);
+Route::get('/admin/team-leader/delete/{id}', [TeamController::class, 'teamLeaderDelete']);
+Route::post('/admin/team-member/store', [TeamController::class, 'teamMemberStore']);
+Route::post('/admin/team-member/update/{id}', [TeamController::class, 'teamMemberUpdate']);

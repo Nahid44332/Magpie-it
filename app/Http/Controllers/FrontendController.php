@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\TeamIntro;
+use App\Models\TeamLeader;
+use App\Models\TeamMember;
 use App\Models\Whyus;
 use Illuminate\Http\Request;
 
@@ -46,7 +49,10 @@ class FrontendController extends Controller
 
     public function team()
     {
-        return view('frontend.team');
+        $teamIntro = TeamIntro::first();
+        $teamleaders = TeamLeader::get();
+        $teammembers = TeamMember::get();
+        return view('frontend.team', compact('teamIntro', 'teamleaders', 'teammembers'));
     }
 
     public function blog()

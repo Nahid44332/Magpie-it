@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\TeamIntro;
 use App\Models\TeamLeader;
+use App\Models\TeamMember;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -18,7 +19,8 @@ class TeamController extends Controller
     {
         $teamIntro = TeamIntro::first();
         $teamleaders = TeamLeader::get();
-        return view('backend.team.team', compact('teamIntro', 'teamleaders'));
+        $teammembers = TeamMember::get();
+        return view('backend.team.team', compact('teamIntro', 'teamleaders', 'teammembers'));
     }
 
     public function teamIntroUpdate(Request $request)
@@ -90,4 +92,70 @@ class TeamController extends Controller
 
         return redirect()->back()->with('success', 'Leader Updated Successfully');
     }
+
+    public function teamLeaderDelete($id)
+    {
+        $leader = TeamLeader::findOrFail($id);
+
+        if ($leader->image && file_exists(public_path('backend/images/teamleader/' . $leader->image))) {
+            unlink(public_path('backend/images/teamleader/' . $leader->image));
+        }
+
+        $leader->delete();
+
+        return redirect()->back()->with('success', 'Leader Deleted Successfully');
+    }
+
+    public function teamMemberStore(Request $request)
+    {
+        $teammembers = new TeamMember();
+
+        $teammembers->name = $request->name;
+        $teammembers->position = $request->position;
+        $teammembers->email = $request->email;
+        $teammembers->facebook = $request->facebook;
+        $teammembers->instagram = $request->instagram;
+        if ($request->hasFile('image')) {
+
+            $imageName = time() . '-teammember.' . $request->image->extension();
+
+            $request->image->move(
+                public_path('backend/images/teammember/'),
+                $imageName
+            );
+
+            $teammembers->image = $imageName;
+        }
+
+        $teammembers->save();
+        return redirect()->back();
+    }
+
+    public function teamMemberUpdate(Request $request, $id)
+{
+    $member = TeamMember::findOrFail($id);
+
+    $member->name = $request->name;
+    $member->position = $request->position;
+    $member->facebook = $request->facebook;
+    $member->instagram = $request->instagram;
+
+    // Image Update
+    if ($request->hasFile('image')) {
+
+        // পুরাতন ছবি delete
+        if ($member->image && file_exists(public_path('backend/images/teammember/'.$member->image))) {
+            unlink(public_path('backend/images/teammember/'.$member->image));
+        }
+
+        $imageName = time().'-teammember.'.$request->image->extension();
+        $request->image->move(public_path('backend/images/teammember/'), $imageName);
+
+        $member->image = $imageName;
+    }
+
+    $member->save();
+
+    return redirect()->back()->with('success','Team Member Updated Successfully');
+}
 }
