@@ -16,19 +16,19 @@
           <div class="col-lg-6">
             <div class="team-intro" data-aos="fade-right" data-aos-delay="150">
               <div class="intro-content">
-                <h3>Meet Our Exceptional Team</h3>
-                <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.</p>
+                <h3>{{$teamIntro->section_heading}}</h3>
+                <p>{{$teamIntro->intro_description}}</p>
                 <div class="stats-row">
                   <div class="stat-item">
-                    <span class="stat-number">50+</span>
+                    <span class="stat-number">{{$teamIntro->team_mamber_count}}+</span>
                     <span class="stat-label">Team Members</span>
                   </div>
                   <div class="stat-item">
-                    <span class="stat-number">8</span>
+                    <span class="stat-number">{{$teamIntro->departments_count}}</span>
                     <span class="stat-label">Departments</span>
                   </div>
                   <div class="stat-item">
-                    <span class="stat-number">15+</span>
+                    <span class="stat-number">{{$teamIntro->countries_count}}+</span>
                     <span class="stat-label">Countries</span>
                   </div>
                 </div>
@@ -38,61 +38,21 @@
 
           <div class="col-lg-6">
             <div class="team-grid" data-aos="fade-left" data-aos-delay="200">
-              <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="250">
+              @foreach ($teammembers as $members)
+                <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="250">
                 <div class="hexagon-inner">
-                  <img src="{{asset('frontend/assets/img/person/person-f-3.webp')}}" alt="Team member">
+                  <img src="{{asset('backend/images/teammember/'.$members->image)}}" alt="Team member">
                   <div class="member-overlay">
-                    <h5>Sarah Chen</h5>
-                    <span>Creative Director</span>
+                    <h5>{{$members->name}}</h5>
+                    <span>{{$members->position}}</span>
                     <div class="social-icons">
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                      <a href="#"><i class="bi bi-twitter"></i></a>
+                      <a href="{{$members->facebook}}"><i class="bi bi-facebook"></i></a>
+                      <a href="{{$members->instagram}}"><i class="bi bi-instagram"></i></a>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="300">
-                <div class="hexagon-inner">
-                  <img src="{{asset('frontend/assets/img/person/person-m-4.webp')}}" alt="Team member">
-                  <div class="member-overlay">
-                    <h5>Marcus Johnson</h5>
-                    <span>Tech Lead</span>
-                    <div class="social-icons">
-                      <a href="#"><i class="bi bi-github"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="350">
-                <div class="hexagon-inner">
-                  <img src="{{asset('frontend/assets/img/person/person-f-8.webp')}}" alt="Team member">
-                  <div class="member-overlay">
-                    <h5>Emma Rodriguez</h5>
-                    <span>Product Manager</span>
-                    <div class="social-icons">
-                      <a href="#"><i class="bi bi-instagram"></i></a>
-                      <a href="#"><i class="bi bi-dribbble"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="member-hexagon" data-aos="zoom-in" data-aos-delay="400">
-                <div class="hexagon-inner">
-                  <img src="{{asset('frontend/assets/img/person/person-m-6.webp')}}" alt="Team member">
-                  <div class="member-overlay">
-                    <h5>David Kim</h5>
-                    <span>UX Architect</span>
-                    <div class="social-icons">
-                      <a href="#"><i class="bi bi-behance"></i></a>
-                      <a href="#"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
 
@@ -128,29 +88,27 @@
                   }
                 </script>
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
+                  @foreach ($teamleaders as $leaders)
+                    <div class="swiper-slide">
                     <div class="leader-card">
                       <div class="leader-image">
-                        <img src="{{asset('frontend/assets/img/person/person-f-14.webp')}}" alt="Leader">
+                        <img src="{{asset('backend/images/teamleader/'.$leaders->image)}}" alt="Leader">
                       </div>
                       <div class="leader-info">
-                        <h5>Jennifer Walsh</h5>
-                        <span class="position">Chief Executive Officer</span>
-                        <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id jfytgfd.</p>
+                        <h5>{{$leaders->name}}</h5>
+                        <span class="position">{{$leaders->position}}</span>
+                        <p>{{$leaders->bio}}</p>
                         <div class="leader-contact">
-                          <a href="#" class="contact-btn">
-                            <i class="bi bi-envelope"></i>
-                          </a>
-                           <a href="#" class="contact-btn">
+                           <a href="{{$leaders->twitter}}" class="contact-btn">
                             <i class="bi bi-twitter"></i>
                           </a>
-                           <a href="#" class="contact-btn">
+                           <a href="{{$leaders->instagram}}" class="contact-btn">
                             <i class="bi bi-instagram"></i>
                           </a>
-                          <a href="#" class="contact-btn">
+                          <a href="{{$leaders->linkedin}}" class="contact-btn">
                             <i class="bi bi-linkedin"></i>
                           </a>
-                            <a href="#" class="contact-btn">
+                            <a href="{{$leaders->github}}" class="contact-btn">
                             <i class="bi bi-github"></i>
                           </a>
                          
@@ -159,96 +117,7 @@
                       </div>
                     </div>
                   </div>
-
-                  <div class="swiper-slide">
-                    <div class="leader-card">
-                      <div class="leader-image">
-                        <img src="{{asset('frontend/assets/img/person/person-m-13.webp')}}" alt="Leader">
-                      </div>
-                      <div class="leader-info">
-                        <h5>Robert Martinez</h5>
-                        <span class="position">Chief Technology Officer</span>
-                        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis.</p>
-                        <div class="leader-contact">
-                               <a href="#" class="contact-btn">
-                            <i class="bi bi-envelope"></i>
-                          </a>
-                           <a href="#" class="contact-btn">
-                            <i class="bi bi-twitter"></i>
-                          </a>
-                           <a href="#" class="contact-btn">
-                            <i class="bi bi-instagram"></i>
-                          </a>
-                          <a href="#" class="contact-btn">
-                            <i class="bi bi-linkedin"></i>
-                          </a>
-                            <a href="#" class="contact-btn">
-                            <i class="bi bi-github"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide">
-                    <div class="leader-card">
-                      <div class="leader-image">
-                        <img src="{{asset('frontend/assets/img/person/person-f-5.webp')}}" alt="Leader">
-                      </div>
-                      <div class="leader-info">
-                        <h5>Lisa Thompson</h5>
-                        <span class="position">Head of Operations</span>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        <div class="leader-contact">
-                                <a href="#" class="contact-btn">
-                            <i class="bi bi-envelope"></i>
-                          </a>
-                           <a href="#" class="contact-btn">
-                            <i class="bi bi-twitter"></i>
-                          </a>
-                           <a href="#" class="contact-btn">
-                            <i class="bi bi-instagram"></i>
-                          </a>
-                          <a href="#" class="contact-btn">
-                            <i class="bi bi-linkedin"></i>
-                          </a>
-                            <a href="#" class="contact-btn">
-                            <i class="bi bi-github"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide">
-                    <div class="leader-card">
-                      <div class="leader-image">
-                        <img src="{{asset('frontend/assets/img/person/person-m-9.webp')}}" alt="Leader">
-                      </div>
-                      <div class="leader-info">
-                        <h5>Alex Garcia</h5>
-                        <span class="position">VP of Marketing</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</p>
-                        <div class="leader-contact">
-                               <a href="#" class="contact-btn">
-                            <i class="bi bi-envelope"></i>
-                          </a>
-                           <a href="#" class="contact-btn">
-                            <i class="bi bi-twitter"></i>
-                          </a>
-                           <a href="#" class="contact-btn">
-                            <i class="bi bi-instagram"></i>
-                          </a>
-                          <a href="#" class="contact-btn">
-                            <i class="bi bi-linkedin"></i>
-                          </a>
-                            <a href="#" class="contact-btn">
-                            <i class="bi bi-github"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  @endforeach
                 </div>
                 <div class="swiper-pagination"></div>
               </div>
