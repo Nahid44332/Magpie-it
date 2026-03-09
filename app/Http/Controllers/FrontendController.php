@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Service;
 use App\Models\TeamIntro;
 use App\Models\TeamLeader;
 use App\Models\TeamMember;
@@ -29,7 +30,8 @@ class FrontendController extends Controller
 
     public function service()
     {
-        return view('frontend.service');
+        $services = Service::get();
+        return view('frontend.service', compact('services'));
     }
 
     public function serviceDetails()

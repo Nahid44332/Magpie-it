@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\admincontroller;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\backend\AboutController;
 use App\Http\Controllers\backend\bannercontroller;
+use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\TeamController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
@@ -45,9 +46,9 @@ Route::post('/admin/about/update', [AboutController::class, 'update']);
 Route::post('/admin/whyus/store', [AboutController::class, 'store'])->name('whyuse.store');
 Route::post('/admin/whyus/update/{id}', [AboutController::class, 'whysUpdate']);
 Route::delete('/admin/whyus/delete/{id}', [AboutController::class, 'delete']);
-#about Route End...
+//about Route End...
 
-#team Route Start...
+//team Route Start...
 Route::get('/admin/team', [TeamController::class, 'team']);
 Route::post('/admin/team-intro/update', [TeamController::class, 'teamIntroUpdate']);
 Route::post('/admin/team-leader/store', [TeamController::class, 'teamLeaderStore']);
@@ -55,3 +56,10 @@ Route::post('/admin/team-leader/update/{id}', [TeamController::class, 'teamLeade
 Route::get('/admin/team-leader/delete/{id}', [TeamController::class, 'teamLeaderDelete']);
 Route::post('/admin/team-member/store', [TeamController::class, 'teamMemberStore']);
 Route::post('/admin/team-member/update/{id}', [TeamController::class, 'teamMemberUpdate']);
+//Tema Route End...
+
+//Service Route Start...
+Route::get('/admin/service', [ServiceController::class, 'Service']);
+Route::post('/admin/service/store',[ServiceController::class,'store']);
+Route::post('/admin/service/update', [ServiceController::class, 'update']);
+Route::post('/admin/service-details/update', [ServiceController::class, 'detailsUpdate'])->name('service.update');
