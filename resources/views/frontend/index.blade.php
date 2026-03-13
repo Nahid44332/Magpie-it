@@ -129,93 +129,23 @@
         <div class="container" data-aos="fade-up" data-aos-delay="100">
 
             <div class="row gy-4">
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                @foreach ($services as $service)
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-card">
                         <div class="service-icon">
-                            <i class="bi bi-palette"></i>
+                            <i class="{{$service->icon}}"></i>
                         </div>
-                        <h4><a href="{{ url('/service-details') }}">Brand Identity Design</a></h4>
-                        <p>Donec vel sapien augue integer urna vel turpis cursus porta aliquam ligula eget ultricies.
+                        <h4><a href="{{ url('service-details/'.$service->id) }}">{{$service->title}}</a></h4>
+                        <p>{{$service->short_description}}
                         </p>
 
-                        <a href="{{ url('/service-details') }}" class="service-link">
+                        <a href="{{ url('service-details/'.$service->id) }}" class="service-link">
                             <span>Learn More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-layout-text-window-reverse"></i>
-                        </div>
-                        <h4><a href="{{ url('/service-details') }}">UI/UX Design</a></h4>
-                        <p>Mauris blandit aliquet elit eget tincidunt nibh pulvinar rutrum tellus pellentesque eu.</p>
-                        <a href="{{ url('/service-details') }}" class="service-link">
-                            <span>Learn More</span>
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-code-slash"></i>
-                        </div>
-                        <h4><a href="{{ url('/service-details') }}">Web Development</a></h4>
-                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-                        <a href="{{ url('/service-details') }}" class="service-link">
-                            <span>Learn More</span>
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-phone"></i>
-                        </div>
-                        <h4><a href="{{ url('/service-details') }}">Mobile App Design</a></h4>
-                        <p>Nulla facilisi morbi tempus iaculis urna id volutpat lacus laoreet non curabitur gravida.</p>
-                        <a href="{{ url('/service-details') }}" class="service-link">
-                            <span>Learn More</span>
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-megaphone"></i>
-                        </div>
-                        <h4><a href="{{ url('/service-details') }}">Digital Marketing</a></h4>
-                        <p>Sed porttitor lectus nibh donec sollicitudin molestie malesuada proin eget tortor risus.</p>
-                        <a href="{{ url('/service-details') }}" class="service-link">
-                            <span>Learn More</span>
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <h4><a href="{{ url('/service-details') }}">SEO Optimization</a></h4>
-                        <p>Curabitur arcu erat accumsan id imperdiet et porttitor at sem pellentesque habitant morbi.
-                        </p>
-                        <a href="{{ url('/service-details') }}" class="service-link">
-                            <span>Learn More</span>
-                            <i class="bi bi-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
             <div class="row mt-5 col-12">

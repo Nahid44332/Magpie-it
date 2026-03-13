@@ -187,75 +187,77 @@
         </div>
 
         <!-- EDIT MODAL -->
-<div class="modal fade" id="editModal">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <h5>Edit Banner</h5>
-                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-
-            <form id="editForm" action="{{url('/admin/banner/update')}}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="edit_id">
-
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label>Title</label>
-                            <input class="form-control" id="edit_title" name="title">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Sub Title</label>
-                            <input class="form-control" id="edit_subtitle" name="subtitle">
-                        </div>
-                        <div class="col-md-4">
-                            <label>Projects Completed</label>
-                            <input type="number" class="form-control" id="edit_projects" name="projects_completed">
-                        </div>
-                        <div class="col-md-4">
-                            <label>Client Satisfaction</label>
-                            <input type="number" class="form-control" id="edit_clients" name="client_satisfaction">
-                        </div>
-                        <div class="col-md-4">
-                            <label>Team Members</label>
-                            <input type="number" class="form-control" id="edit_team" name="team_members">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Banner Image</label>
-                            <input type="file" class="form-control" name="image">
-                            <img id="edit_image_preview" class="mt-2" style="width: 80px; height: 80px; border-radius: 8px;">
-                        </div>
+        <div class="modal fade" id="editModal">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5>Edit Banner</h5>
+                        <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                </div>
 
-                <div class="modal-footer border-0">
-                    <button type="submit" class="btn btn-custom">Update</button>
+                    <form id="editForm" action="{{ url('/admin/banner/update') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <input type="hidden" name="id" id="edit_id">
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label>Title</label>
+                                    <input class="form-control" id="edit_title" name="title">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Sub Title</label>
+                                    <input class="form-control" id="edit_subtitle" name="subtitle">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Projects Completed</label>
+                                    <input type="number" class="form-control" id="edit_projects" name="projects_completed">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Client Satisfaction</label>
+                                    <input type="number" class="form-control" id="edit_clients" name="client_satisfaction">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Team Members</label>
+                                    <input type="number" class="form-control" id="edit_team" name="team_members">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Banner Image</label>
+                                    <input type="file" class="form-control" name="image">
+                                    <img id="edit_image_preview" class="mt-2"
+                                        style="width: 80px; height: 80px; border-radius: 8px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer border-0">
+                            <button type="submit" class="btn btn-custom">Update</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
 
         <!-- DELETE MODAL -->
-       <div class="modal fade" id="deleteModal">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content text-center">
-            <form id="deleteForm" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    <i class="bi bi-exclamation-triangle text-danger fs-2"></i>
-                    <p class="mt-2">Delete this banner?</p>
-                    <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        <div class="modal fade" id="deleteModal">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content text-center">
+                    <form id="deleteForm" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <div class="modal-body">
+                            <i class="bi bi-exclamation-triangle text-danger fs-2"></i>
+                            <p class="mt-2">Delete this banner?</p>
+                            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
@@ -264,49 +266,48 @@
 @endsection
 @push('script')
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const editModal = document.getElementById('editModal');
-        const editButtons = document.querySelectorAll('.editBtn');
+        document.addEventListener('DOMContentLoaded', function() {
+            const editModal = document.getElementById('editModal');
+            const editButtons = document.querySelectorAll('.editBtn');
 
-        editButtons.forEach(btn => {
-            btn.addEventListener('click', function () {
-                const id = this.dataset.id;
-                const title = this.dataset.title;
-                const subtitle = this.dataset.subtitle;
-                const projects = this.dataset.projects;
-                const clients = this.dataset.clients;
-                const team = this.dataset.team;
-                const image = this.dataset.image;
+            editButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const title = this.dataset.title;
+                    const subtitle = this.dataset.subtitle;
+                    const projects = this.dataset.projects;
+                    const clients = this.dataset.clients;
+                    const team = this.dataset.team;
+                    const image = this.dataset.image;
 
-                // Form field গুলোতে ডেটা সেট করো
-                document.getElementById('edit_id').value = id;
-                document.getElementById('edit_title').value = title;
-                document.getElementById('edit_subtitle').value = subtitle;
-                document.getElementById('edit_projects').value = projects;
-                document.getElementById('edit_clients').value = clients;
-                document.getElementById('edit_team').value = team;
-                document.getElementById('edit_image_preview').src = image;
+                    // Form field গুলোতে ডেটা সেট করো
+                    document.getElementById('edit_id').value = id;
+                    document.getElementById('edit_title').value = title;
+                    document.getElementById('edit_subtitle').value = subtitle;
+                    document.getElementById('edit_projects').value = projects;
+                    document.getElementById('edit_clients').value = clients;
+                    document.getElementById('edit_team').value = team;
+                    document.getElementById('edit_image_preview').src = image;
 
-                // ফর্মের action URL আপডেট করো
-                document.getElementById('editForm').action = `/admin/banner/update/${id}`;
+                    // ফর্মের action URL আপডেট করো
+                    document.getElementById('editForm').action = `/admin/banner/update/${id}`;
+                });
             });
         });
-    });
 
-    document.addEventListener('DOMContentLoaded', function () {
-    const deleteButtons = document.querySelectorAll('.btn-outline-danger');
-    const deleteForm = document.getElementById('deleteForm');
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.btn-outline-danger');
+            const deleteForm = document.getElementById('deleteForm');
 
-    deleteButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const tr = this.closest('tr');
-            const id = tr.querySelector('.editBtn').dataset.id;
+            deleteButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tr = this.closest('tr');
+                    const id = tr.querySelector('.editBtn').dataset.id;
 
-            // Form action set
-            deleteForm.action = `/admin/banner/delete/${id}`;
+                    // Form action set
+                    deleteForm.action = `/admin/banner/delete/${id}`;
+                });
+            });
         });
-    });
-});
-
-</script>
+    </script>
 @endpush

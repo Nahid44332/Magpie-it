@@ -18,7 +18,8 @@ class FrontendController extends Controller
         $banners = Banner::get();
         $abouts = About::first();
         $whyuses = Whyus::get();
-        return view('frontend.index', compact('banners', 'abouts', 'whyuses'));
+        $services = Service::get();
+        return view('frontend.index', compact('banners', 'abouts', 'whyuses', 'services'));
     }
 
     public function about()
@@ -30,13 +31,14 @@ class FrontendController extends Controller
 
     public function service()
     {
-        $services = Service::get();
+        $services = Service::with('features','process','sidebar')->get();
         return view('frontend.service', compact('services'));
     }
 
-    public function serviceDetails()
+    public function serviceDetails($id)
     {
-        return view('frontend.service-details');
+        $services = Service::with('features','process','sidebar')->find($id);
+        return view('frontend.service-details', compact('services'));
     }
 
     public function protfolio()

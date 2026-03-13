@@ -630,8 +630,8 @@
         }
 
         /* =========================
-                                                               GLOBAL RESPONSIVE FIX
-                                                            ========================= */
+                                                                                           GLOBAL RESPONSIVE FIX
+                                                                                        ========================= */
         img,
         canvas {
             max-width: 100%;
@@ -639,8 +639,8 @@
         }
 
         /* =========================
-                                                               MAIN CONTENT RESPONSIVE
-                                                            ========================= */
+                                                                                           MAIN CONTENT RESPONSIVE
+                                                                                        ========================= */
         @media (max-width: 992px) {
             .main {
                 padding: 20px;
@@ -648,8 +648,8 @@
         }
 
         /* =========================
-                                                               NAVBAR FIX
-                                                            ========================= */
+                                                                                           NAVBAR FIX
+                                                                                        ========================= */
         @media (max-width: 576px) {
             .navbar-top {
                 flex-direction: column;
@@ -659,8 +659,8 @@
         }
 
         /* =========================
-                                                               SIDEBAR MOBILE SAFE
-                                                            ========================= */
+                                                                                           SIDEBAR MOBILE SAFE
+                                                                                        ========================= */
         @media (max-width: 768px) {
             .sidebar {
                 width: 240px;
@@ -903,21 +903,6 @@
         </div>
     </div>
 
-    <!-- Delete Service Modal -->
-    <div class="modal fade" id="deleteServiceModal" tabindex="-1">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content text-center">
-                <div class="modal-body">
-                    <i class="bi bi-exclamation-triangle text-danger fs-2"></i>
-                    <p>Are you sure you want to delete this service?</p>
-                    <div class="d-flex justify-content-around mt-3">
-                        <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- ======================= SERVICE DETAILS SECTION ======================= -->
     <div class=" py-4">
@@ -969,33 +954,33 @@
                                         data-support="{{ optional($service->sidebar)->support }}">
                                         <i class="bi bi-eye"></i> View
                                     </button>
-                                    <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
-                                        data-bs-target="#editServiceDetailsModal" 
-                                        data-id="{{ $service->id }}"
+                                    <button class="btn btn-sm btn-outline-warning editBtn" data-bs-toggle="modal"
+                                        data-bs-target="#editServiceDetailsModal" data-id="{{ $service->id }}"
                                         data-title="{{ $service->title }}" data-icon="{{ $service->icon }}"
                                         data-short_description="{{ $service->short_description }}"
                                         data-description="{{ $service->description }}"
                                         data-header_title="{{ $service->header_title }}"
                                         data-header_description="{{ $service->header_description }}"
                                         data-section_description="{{ $service->section_description }}"
-                                        data-image="{{ asset('/backend/images/service/'.$service->image) }}"
-                                        data-performance_analytics="{{ optional($service->features)->performance_analytics }}"
-                                        data-target_audience_research="{{ optional($service->features)->target_audience_research }}"
-                                        data-content_creation="{{ optional($service->features)->content_creation }}"
-                                        data-social_media_management="{{ optional($service->features)->social_media_management }}"
-                                        data-strategy_development="{{ optional($service->process)->strategy_development }}"
-                                        data-implementation="{{ optional($service->process)->implementation }}"
-                                        data-optimization="{{ optional($service->process)->optimization }}"
-                                        data-results_reporting="{{ optional($service->process)->results_reporting }}"
-                                        data-duration="{{ optional($service->sidebar)->duration }}"
-                                        data-delivery="{{ optional($service->sidebar)->delivery }}"
-                                        data-team_size="{{ optional($service->sidebar)->team_size }}"
-                                        data-support="{{ optional($service->sidebar)->support }}">
+                                        data-performance_analytics="{{ $service->features->performance_analytics }}"
+                                        data-target_audience_research="{{ $service->features->target_audience_research }}"
+                                        data-content_creation="{{ $service->features->content_creation }}"
+                                        data-social_media_management="{{ $service->features->social_media_management }}"
+                                        data-strategy_development="{{ $service->process->strategy_development }}"
+                                        data-implementation="{{ $service->process->implementation }}"
+                                        data-optimization="{{ $service->process->optimization }}"
+                                        data-results_reporting="{{ $service->process->results_reporting }}"
+                                        data-duration="{{ $service->sidebar->duration }}"
+                                        data-delivery="{{ $service->sidebar->delivery }}"
+                                        data-team_size="{{ $service->sidebar->team_size }}"
+                                        data-support="{{ $service->sidebar->support }}"
+                                        data-image="{{ asset('backend/images/service/' . $service->image) }}">
                                         <i class="bi bi-pencil"></i> Edit
                                     </button>
-                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
-                                        data-bs-target="#deleteServiceDetailsModal"><i class="bi bi-trash"></i>
-                                        Delete</button>
+                                    <button class="btn btn-sm btn-outline-danger deleteBtn" data-bs-toggle="modal"
+                                        data-bs-target="#deleteServiceModal" id="someInput" data-id="{{ $service->id }}"
+                                         ><i class="bi bi-trash"></i>Delete
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -1169,7 +1154,7 @@
 
                             <!-- Basic Info -->
                             <h6 class="fw-bold text-primary">Basic Info</h6>
-                            <input type="hidden" name="id" id="edit_id">
+                            <input type="hidden" id="edit_details_id" name="id">
 
                             <div class="col-md-6">
                                 <label>Service Title</label>
@@ -1304,20 +1289,24 @@
     </div>
 
     <!-- Delete Service Details Modal -->
-    <div class="modal fade mt-5" id="deleteServiceDetailsModal" tabindex="-1">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content text-center">
-                <div class="modal-body">
-                    <i class="bi bi-exclamation-triangle text-danger fs-2"></i>
-                    <p class="mt-2">Are you sure to delete this service?</p>
-                    <div class="d-flex justify-content-around mt-3">
-                        <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </div>
+    <<div class="modal fade" id="deleteServiceModal" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-body">
+                <i class="bi bi-exclamation-triangle text-danger fs-2"></i>
+                <p>Are you sure you want to delete this service?</p>
+
+                <!-- Hidden input ধরে রাখবে ID -->
+                <input type="hidden" id="delete_id">
+
+                <div class="d-flex justify-content-around mt-3">
+                    <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger btn-sm" id="confirmDeleteBtn">Delete</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 @push('script')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -1431,43 +1420,74 @@
         })
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.editBtn').forEach(button => {
 
-    const editModal = document.getElementById('editServiceDetailsModal');
+            button.addEventListener('click', function() {
 
-    editModal.addEventListener('show.bs.modal', function (event) {
 
-        const button = event.relatedTarget;
+                document.getElementById('edit_details_id').value = this.dataset.id
+                document.getElementById('edit_details_title').value = this.dataset.title
+                document.getElementById('edit_details_icon').value = this.dataset.icon
+                document.getElementById('edit_short_description').value = this.dataset.short_description
+                document.getElementById('edit_details_description').value = this.dataset.description
 
-        document.getElementById('edit_id').value = button.getAttribute('data-id');
-        document.getElementById('edit_details_title').value = button.getAttribute('data-title');
-        document.getElementById('edit_details_icon').value = button.getAttribute('data-icon');
-        document.getElementById('edit_short_description').value = button.getAttribute('data-short_description');
-        document.getElementById('edit_details_description').value = button.getAttribute('data-description');
+                document.getElementById('edit_header_title').value = this.dataset.header_title
+                document.getElementById('edit_header_description').value = this.dataset.header_description
+                document.getElementById('edit_section_description').value = this.dataset.section_description
 
-        document.getElementById('edit_header_title').value = button.getAttribute('data-header_title');
-        document.getElementById('edit_header_description').value = button.getAttribute('data-header_description');
-        document.getElementById('edit_section_description').value = button.getAttribute('data-section_description');
+                document.getElementById('edit_performance_analytics').value = this.dataset
+                    .performance_analytics
+                document.getElementById('edit_target_audience_research').value = this.dataset
+                    .target_audience_research
+                document.getElementById('edit_content_creation').value = this.dataset.content_creation
+                document.getElementById('edit_social_media_management').value = this.dataset
+                    .social_media_management
 
-        document.getElementById('edit_image').src = button.getAttribute('data-image');
+                document.getElementById('edit_strategy_development').value = this.dataset
+                    .strategy_development
+                document.getElementById('edit_implementation').value = this.dataset.implementation
+                document.getElementById('edit_optimization').value = this.dataset.optimization
+                document.getElementById('edit_results_reporting').value = this.dataset.results_reporting
 
-        document.getElementById('edit_performance_analytics').value = button.getAttribute('data-performance_analytics');
-        document.getElementById('edit_target_audience_research').value = button.getAttribute('data-target_audience_research');
-        document.getElementById('edit_content_creation').value = button.getAttribute('data-content_creation');
-        document.getElementById('edit_social_media_management').value = button.getAttribute('data-social_media_management');
+                document.getElementById('edit_duration').value = this.dataset.duration
+                document.getElementById('edit_delivery').value = this.dataset.delivery
+                document.getElementById('edit_team_size').value = this.dataset.team_size
+                document.getElementById('edit_support').value = this.dataset.support
 
-        document.getElementById('edit_strategy_development').value = button.getAttribute('data-strategy_development');
-        document.getElementById('edit_implementation').value = button.getAttribute('data-implementation');
-        document.getElementById('edit_optimization').value = button.getAttribute('data-optimization');
-        document.getElementById('edit_results_reporting').value = button.getAttribute('data-results_reporting');
+                document.getElementById('edit_image').src = this.dataset.image
+            })
+        })
+    </script>
 
-        document.getElementById('edit_duration').value = button.getAttribute('data-duration');
-        document.getElementById('edit_delivery').value = button.getAttribute('data-delivery');
-        document.getElementById('edit_team_size').value = button.getAttribute('data-team_size');
-        document.getElementById('edit_support').value = button.getAttribute('data-support');
+    <script>
+       document.addEventListener('DOMContentLoaded', () => {
+    const deleteButtons = document.querySelectorAll('.deleteBtn');
+    const deleteIdInput = document.getElementById('delete_id');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 
+    if (!deleteIdInput || !confirmDeleteBtn) {
+        console.error('Modal elements missing!');
+        return;
+    }
+
+    // যখন যেকোনো delete button click হবে
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            console.log("Delete ID:", id); // Debug
+            deleteIdInput.value = id;      // Hidden input এ set করো
+        });
     });
 
-});    
-</script>
+    // Modal এর confirm delete button click হলে form submit বা redirect
+    confirmDeleteBtn.addEventListener('click', () => {
+        const id = deleteIdInput.value;
+        if (!id) return;
+
+        // Laravel route call (form submit or fetch)
+        // এখানে simplest: window.location.href
+        window.location.href = `/admin/service-details/delete/${id}`;
+    });
+});
+    </script>
 @endpush

@@ -87,95 +87,67 @@ class ServiceController extends Controller
         return back();
     }
 
+
     public function detailsUpdate(Request $request)
-{
-    dd($request->all());
-    // ১. Validation
-    $request->validate([
-        'id' => 'required|exists:services,id',
-        'title' => 'required|string|max:255',
-        'icon' => 'nullable|string|max:255',
-        'short_description' => 'nullable|string',
-        'description' => 'nullable|string',
-        'header_title' => 'nullable|string',
-        'header_description' => 'nullable|string',
-        'section_description' => 'nullable|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'performance_analytics' => 'nullable|string',
-        'target_audience_research' => 'nullable|string',
-        'content_creation' => 'nullable|string',
-        'social_media_management' => 'nullable|string',
-        'strategy_development' => 'nullable|string',
-        'implementation' => 'nullable|string',
-        'optimization' => 'nullable|string',
-        'results_reporting' => 'nullable|string',
-        'duration' => 'nullable|string',
-        'delivery' => 'nullable|string',
-        'team_size' => 'nullable|string',
-        'support' => 'nullable|string',
-    ]);
+    {
+        $service = Service::with('features', 'process', 'sidebar')->find($request->id);
 
-    // ২. Service খুঁজে পাওয়া
-    $service = Service::findOrFail($request->id);
+        $service->update([
+            'title' => $request->title,
+            'icon' => $request->icon,
+            'short_description' => $request->short_description,
+            'description' => $request->description,
+            'header_title' => $request->header_title,
+            'header_description' => $request->header_description,
+            'section_description' => $request->section_description,
+        ]);
 
-    // ৩. Basic info update
-    $service->title = $request->title;
-    $service->icon = $request->icon;
-    $service->short_description = $request->short_description;
-    $service->description = $request->description;
-    $service->header_title = $request->header_title;
-    $service->header_description = $request->header_description;
-    $service->section_description = $request->section_description;
+        if ($request->hasFile('image')) {
+            if ($service->image && file_exists(public_path('backend/images/service/' . $service->image))) {
+                unlink(public_path('backend/images/service/' . $service->image));
+            }
 
-    // ৪. Image update (নতুন image দিলে পুরনো delete)
-    if ($request->hasFile('image')) {
-        if ($service->image && file_exists(public_path($service->image))) {
-            unlink(public_path($service->image));
+            $imageName = rand() . '-service.' . $request->image->extension();
+            $request->image->move(public_path('backend/images/service/'), $imageName);
+            $service->image = $imageName;
         }
 
-        $image = $request->file('image');
-        $name = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('backend/images/service'), $name);
-        $service->image = 'backend/images/service/' . $name;
-    }
-
-    $service->save();
-
-    // ৫. Related Features update/create
-    $service->features()->updateOrCreate(
-        ['service_id' => $service->id],
-        [
+        $service->features->update([
             'performance_analytics' => $request->performance_analytics,
             'target_audience_research' => $request->target_audience_research,
             'content_creation' => $request->content_creation,
             'social_media_management' => $request->social_media_management,
-        ]
-    );
+        ]);
 
-    // ৬. Related Process update/create
-    $service->process()->updateOrCreate(
-        ['service_id' => $service->id],
-        [
+        $service->process->update([
             'strategy_development' => $request->strategy_development,
             'implementation' => $request->implementation,
             'optimization' => $request->optimization,
             'results_reporting' => $request->results_reporting,
-        ]
-    );
+        ]);
 
-    // ৭. Related Sidebar update/create
-    $service->sidebar()->updateOrCreate(
-        ['service_id' => $service->id],
-        [
+        $service->sidebar->update([
             'duration' => $request->duration,
             'delivery' => $request->delivery,
             'team_size' => $request->team_size,
             'support' => $request->support,
-        ]
-    );
+        ]);
 
-    $service->save();
-    // ৮. Redirect back with success
-    return redirect()->back()->with('success', 'Service Updated Successfully');
-}
+        return back()->with('success', 'Service Updated Successfully');
+    }
+
+    public function detailsDestroy($id)
+    {
+        $service = Service::findOrFail($id);
+
+        // ইমেজ থাকলে ডিলিট করা
+        if ($service->image && file_exists(public_path('backend/images/service/' . $service->image))) {
+            unlink(public_path('backend/images/service/' . $service->image));
+        }
+
+        // ব্যানার ডিলিট করা
+        $service->delete();
+
+        return redirect()->back()->with('success', 'Banner deleted successfully!');
+    }
 }
