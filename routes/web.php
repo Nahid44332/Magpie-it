@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\admincontroller;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\backend\AboutController;
 use App\Http\Controllers\backend\bannercontroller;
+use App\Http\Controllers\backend\PricingController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\TeamController;
 use App\Http\Controllers\FrontendController;
@@ -64,3 +65,8 @@ Route::post('/admin/service/store',[ServiceController::class,'store']);
 Route::post('/admin/service/update', [ServiceController::class, 'update']);
 Route::post('/admin/service-details/update', [ServiceController::class, 'detailsUpdate'])->name('service.update');
 Route::get('/admin/service-details/delete/{id}', [ServiceController::class,'detailsDestroy']);
+//Service Route End....
+
+//Pricing Route Start...
+Route::get('/admin/pricing', [PricingController::class, 'price']);
+Route::post('/admin/pricing/store', [PricingController::class, 'priceStore']);

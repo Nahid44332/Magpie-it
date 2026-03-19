@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Pricing;
 use App\Models\Service;
 use App\Models\TeamIntro;
 use App\Models\TeamLeader;
@@ -71,7 +72,8 @@ class FrontendController extends Controller
 
     public function pricing()
     {
-        return view('frontend.pricing');
+        $pricing = Pricing::get();
+        return view('frontend.pricing', compact('pricing'));
     }
 
     public function order()
