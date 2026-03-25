@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\admincontroller;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\backend\AboutController;
 use App\Http\Controllers\backend\bannercontroller;
+use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\PricingController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\TeamController;
@@ -70,3 +71,7 @@ Route::get('/admin/service-details/delete/{id}', [ServiceController::class,'deta
 //Pricing Route Start...
 Route::get('/admin/pricing', [PricingController::class, 'price']);
 Route::post('/admin/pricing/store', [PricingController::class, 'priceStore']);
+//Pricing Route End...
+
+//Order Route Start...
+Route::get('/admin/order', [OrderController::class, 'Order']);
