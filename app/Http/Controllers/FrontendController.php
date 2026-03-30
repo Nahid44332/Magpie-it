@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Order;
 use App\Models\Pricing;
 use App\Models\Service;
 use App\Models\TeamIntro;
@@ -28,17 +29,17 @@ class FrontendController extends Controller
         $abouts = About::first();
         $whyuses = Whyus::get();
         return view('frontend.about', compact('abouts', 'whyuses'));
-    } 
+    }
 
     public function service()
     {
-        $services = Service::with('features','process','sidebar')->get();
+        $services = Service::with('features', 'process', 'sidebar')->get();
         return view('frontend.service', compact('services'));
     }
 
     public function serviceDetails($id)
     {
-        $services = Service::with('features','process','sidebar')->find($id);
+        $services = Service::with('features', 'process', 'sidebar')->find($id);
         return view('frontend.service-details', compact('services'));
     }
 
@@ -80,6 +81,26 @@ class FrontendController extends Controller
     {
         return view('frontend.order');
     }
+
+    public function orderStore(Request $request)
+{
+    $order = new Order();
+
+    $order->name = $request->name;
+    $order->email = $request->email;
+    $order->whatsapp = $request->whatsapp;
+    $order->subject = $request->subject;
+    $order->message = $request->message;
+    $order->status = 'Pending';
+
+    $order->save(); // প্রথমে save
+
+    // তারপর order_id generate
+    $order->order_id = 'ORD-' . str_pad($order->id, 4, '0', STR_PAD_LEFT);
+    $order->save();
+
+    return redirect()->back()->with('success','Order Created Successfully');
+}
 
     public function contact()
     {

@@ -379,8 +379,8 @@
         }
 
         /* =========================
-               GLOBAL RESPONSIVE FIX
-            ========================= */
+                               GLOBAL RESPONSIVE FIX
+                            ========================= */
         img,
         canvas {
             max-width: 100%;
@@ -388,8 +388,8 @@
         }
 
         /* =========================
-               MAIN CONTENT RESPONSIVE
-            ========================= */
+                               MAIN CONTENT RESPONSIVE
+                            ========================= */
         @media (max-width: 992px) {
             .main {
                 padding: 20px;
@@ -397,8 +397,8 @@
         }
 
         /* =========================
-               NAVBAR FIX
-            ========================= */
+                               NAVBAR FIX
+                            ========================= */
         @media (max-width: 576px) {
             .navbar-top {
                 flex-direction: column;
@@ -408,8 +408,8 @@
         }
 
         /* =========================
-               SIDEBAR MOBILE SAFE
-            ========================= */
+                               SIDEBAR MOBILE SAFE
+                            ========================= */
         @media (max-width: 768px) {
             .sidebar {
                 width: 240px;
@@ -426,6 +426,58 @@
                 -webkit-overflow-scrolling: touch;
                 /* smooth mobile scroll */
             }
+        }
+
+        /* ===== Custom Modal Dark Theme ===== */
+
+        .modal-content {
+            background: #14152A;
+            border: 2px solid #4641B3;
+            border-radius: 12px;
+            color: #fff;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-title {
+            color: #6C63FF;
+            font-weight: 600;
+        }
+
+        .modal-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-body .form-control {
+            background: #0f1120;
+            border: 1px solid #4641B3;
+            color: #fff;
+        }
+
+        .modal-body .form-control:focus {
+            border-color: #6C63FF;
+            box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.2);
+        }
+
+        .modal-body label {
+            font-size: 14px;
+            color: #a6b0c3;
+        }
+
+        /* Button Style */
+
+        .btn-update {
+            background: linear-gradient(90deg, #6C63FF, #4641B3);
+            border: none;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 8px;
+        }
+
+        .btn-update:hover {
+            opacity: 0.9;
         }
     </style>
     <div class="mt-5">
@@ -510,13 +562,90 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a>
-                                <a href="#" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                                <button class="btn btn-sm btn-primary editBtn" data-id="{{ $price->id }}"
+                                    data-title="{{ $price->title }}" data-subtitle="{{ $price->subtitle }}"
+                                    data-price="{{ $price->price }}" data-description="{{ $price->description }}"
+                                    data-delivery="{{ $price->delivery_time }}"
+                                    data-features='@json(json_decode($price->features))' data-bs-toggle="modal"
+                                    data-bs-target="#editModal">
+
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+
+                                <a href="{{ url('/admin/pricing/delete/' . $price->id) }}"
+                                    onclick="return confirm('Are you sure you want to delete this package?')"
+                                    class="btn btn-sm btn-danger">
+
+                                    <i class="bi bi-trash"></i>
+
+                                </a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Package</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="editForm" method="POST">
+                    @csrf
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label>Package Title</label>
+                            <input type="text" class="form-control" id="editTitle" name="title">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Subtitle</label>
+                            <input type="text" class="form-control" id="editSubtitle" name="subtitle">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Price</label>
+                            <input type="text" class="form-control" id="editPrice" name="price">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Description</label>
+                            <input type="text" class="form-control" id="editDescription" name="description">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Delivery Time</label>
+                            <input type="text" class="form-control" id="editDelivery" name="delivery_time">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Features</label>
+
+                            <div id="editFeatureWrapper"></div>
+
+                            <button type="button" class="btn btn-sm btn-secondary mt-2" id="addFeatureBtn">
+                                Add Feature
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn-update">Update Package</button>
+                    </div>
+
+                </form>
+
+            </div>
         </div>
     </div>
 @endsection
@@ -668,6 +797,85 @@
                 }
 
             });
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.editBtn').forEach(button => {
+
+            button.addEventListener('click', function() {
+
+                const id = this.dataset.id;
+                const title = this.dataset.title;
+                const subtitle = this.dataset.subtitle;
+                const price = this.dataset.price;
+                const description = this.dataset.description;
+                const delivery = this.dataset.delivery;
+
+                document.getElementById('editTitle').value = title;
+                document.getElementById('editSubtitle').value = subtitle;
+                document.getElementById('editPrice').value = price;
+                document.getElementById('editDescription').value = description;
+                document.getElementById('editDelivery').value = delivery;
+
+                document.getElementById('editForm').action = "/admin/pricing/update/" + id;
+
+            });
+
+        });
+        document.querySelectorAll(".editBtn").forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                const features = this.dataset.features ? JSON.parse(this.dataset.features) : [];
+
+                const wrapper = document.getElementById("editFeatureWrapper");
+                wrapper.innerHTML = "";
+
+                features.forEach(feature => {
+
+                    const div = document.createElement("div");
+                    div.classList.add("input-group", "mb-2");
+
+                    div.innerHTML = `
+                <input type="text" name="features[]" class="form-control" value="${feature}">
+                <button class="btn btn-danger removeFeatureBtn" type="button">Remove</button>
+            `;
+
+                    wrapper.appendChild(div);
+
+                });
+
+            });
+
+        });
+
+
+        // Add Feature
+        document.getElementById("addFeatureBtn").addEventListener("click", function() {
+
+            const wrapper = document.getElementById("editFeatureWrapper");
+
+            const div = document.createElement("div");
+
+            div.classList.add("input-group", "mb-2");
+
+            div.innerHTML = `
+        <input type="text" name="features[]" class="form-control" placeholder="Feature">
+        <button class="btn btn-danger removeFeatureBtn" type="button">Remove</button>
+    `;
+
+            wrapper.appendChild(div);
+
+        });
+
+
+        // Remove Feature
+        document.addEventListener("click", function(e) {
+
+            if (e.target.classList.contains("removeFeatureBtn")) {
+                e.target.parentElement.remove();
+            }
+
         });
     </script>
 @endpush

@@ -26,6 +26,7 @@ Route::get('/blog-details', [FrontendController::class, 'blogDetails']);
 Route::get('/pricing', [FrontendController::class, 'pricing']);
 Route::get('/contact', [FrontendController::class, 'contact']);
 Route::get('/order', [FrontendController::class, 'order']);
+Route::post('/order/store', [FrontendController::class, 'orderStore']);
 
 //admin Login
 Route::get('/admin/login', [AdminAuthController::class, 'AdminLogin']);
@@ -71,7 +72,10 @@ Route::get('/admin/service-details/delete/{id}', [ServiceController::class,'deta
 //Pricing Route Start...
 Route::get('/admin/pricing', [PricingController::class, 'price']);
 Route::post('/admin/pricing/store', [PricingController::class, 'priceStore']);
+Route::post('/admin/pricing/update/{id}', [PricingController::class,'update']);
+Route::get('/admin/pricing/delete/{id}', [PricingController::class,'delete']);
 //Pricing Route End...
 
 //Order Route Start...
 Route::get('/admin/order', [OrderController::class, 'Order']);
+Route::post('/order/status/{id}', [OrderController::class,'statusUpdate'])->name('order.status');

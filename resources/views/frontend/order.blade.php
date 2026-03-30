@@ -60,7 +60,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="contact-form">
-                <form action="#" method="POST">
+                <form action="{{url('/order/store')}}" method="POST">
                     @csrf
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <input type="tel" name="phone" placeholder="Your WhatsApp Number" required>
+                            <input type="tel" name="whatsapp" placeholder="Your WhatsApp Number" required>
                         </div>
 
                         <div class="col-md-6">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,6 +15,17 @@ class OrderController extends Controller
 
     public function order()
     {
-        return view('backend.order.order');
+        $orders = Order::get();
+        return view('backend.order.order', compact('orders'));
+    }
+
+    public function statusUpdate(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        $order->status = $request->status;
+        $order->save();
+
+        return back()->with('success', 'Status Updated');
     }
 }

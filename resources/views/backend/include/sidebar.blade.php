@@ -1,17 +1,24 @@
 <style>
-    .dropdown-menu {
-        background: #0f1a2a;
-        border: none;
-    }
+    .submenu{
+    display:none;
+    list-style:none;
+    padding-left:25px;
+}
 
-    .dropdown-item {
-        color: #a6b0c3;
-    }
+.submenu li a{
+    display:block;
+    padding:8px 0;
+    color:#a6b0c3;
+    text-decoration:none;
+}
 
-    .dropdown-item:hover {
-        background: #1b2a44;
-        color: #fff;
-    }
+.submenu li a:hover{
+    color:#fff;
+}
+
+.menu-dropdown.active .submenu{
+    display:block;
+}
 </style>
 <aside class="sidebar">
     <div class="brand">
@@ -25,16 +32,18 @@
         <li><a href="{{ url('/admin/team') }}"><i class="bi bi-people"></i> Team</a></li>
         <li><a href="{{ url('/admin/service') }}"><i class="bi bi-check2-square"></i> Service</a></li>
         <li><a href="{{ url('/admin/pricing') }}"><i class="bi bi-cash-stack"></i>Pricing</a></li>
-        <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="orderDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="menu-dropdown">
+    <a href="#" class="dropdown-btn">
         <i class="bi bi-bag"></i> Order
+        <i class="bi bi-chevron-down float-end"></i>
     </a>
 
-    <ul class="dropdown-menu" aria-labelledby="orderDropdown">
-        <li><a class="dropdown-item" href="{{url('/admin/order')}}">All Order</a></li>
-        <li><a class="dropdown-item" href="#">Order List</a></li>
-        <li><a class="dropdown-item" href="#">Pending Order</a></li>
-        <li><a class="dropdown-item" href="#">Completed Order</a></li>
+    <ul class="submenu">
+        <li><a href="{{ url('/admin/order') }}">All Order</a></li>
+        <li><a href="#">Pending Order</a></li>
+        <li><a href="#">In Progress Order</a></li>
+        <li><a href="#">Completed Order</a></li>
+        <li><a href="#">Daliverd Order</a></li>
     </ul>
 </li>
         <li><a href="profile.html"><i class="bi bi-person"></i> Profile</a></li>
@@ -50,3 +59,11 @@
     <button class="cta-get mt-5">Logout</button>
 </aside>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.querySelectorAll(".dropdown-btn").forEach(button => {
+    button.addEventListener("click", function(e){
+        e.preventDefault();
+        this.parentElement.classList.toggle("active");
+    });
+});
+</script>

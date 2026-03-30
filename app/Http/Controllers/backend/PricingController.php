@@ -46,4 +46,32 @@ class PricingController extends Controller
 
         return back()->with('success', 'Pricing Added Successfully!');
     }
+
+    public function update(Request $request, $id)
+    {
+        $price = Pricing::find($id);
+
+        $price->title = $request->title;
+        $price->subtitle = $request->subtitle;
+        $price->price = $request->price;
+        $price->description = $request->description;
+        $price->delivery_time = $request->delivery_time;
+
+        $price->features = json_encode($request->features);
+
+        $price->save();
+
+        return back()->with('success', 'Package Updated Successfully');
+    }
+
+    public function delete($id)
+{
+    $price = Pricing::find($id);
+
+    if($price){
+        $price->delete();
+    }
+
+    return back()->with('success','Package Deleted Successfully');
+}
 }
