@@ -114,7 +114,7 @@
 
                     <tbody>
                         @foreach ($orders as $order)
-                               <tr>
+                            <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $order->order_id }}</td>
                                 <td>{{ $order->name }}</td>
@@ -128,16 +128,19 @@
                                         <select name="status" onchange="this.form.submit()"
                                             class="form-select form-select-sm status-dropdown">
 
-                                            <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>Pending
+                                            <option value="Pending" {{ $order->status == 'Pending' ? 'selected' : '' }}>
+                                                Pending
                                             </option>
 
-                                            <option value="In Progress" {{ $order->status == 'In Progress' ? 'selected' : '' }}>In
+                                            <option value="In Progress"
+                                                {{ $order->status == 'In Progress' ? 'selected' : '' }}>In
                                                 Progress</option>
 
                                             <option value="Complete" {{ $order->status == 'Complete' ? 'selected' : '' }}>
                                                 Complete</option>
 
-                                            <option value="Delivered" {{ $order->status == 'Delivered' ? 'selected' : '' }}>
+                                            <option value="Delivered"
+                                                {{ $order->status == 'Delivered' ? 'selected' : '' }}>
                                                 Delivered</option>
 
                                         </select>
@@ -145,12 +148,27 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-info">
+                                    <a href="#" class="btn btn-sm btn-info editOrderBtn"
+                                        data-id="{{ $order->id }}" data-name="{{ $order->name }}"
+                                        data-whatsapp="{{ $order->whatsapp }}" data-email="{{ $order->email }}"
+                                        data-subject="{{ $order->subject }}" data-message="{{ $order->message }}"
+                                        data-bs-toggle="modal" data-bs-target="#editOrderModal">
+
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
+                                    <form action="{{ route('order.delete', $order->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Delete this order?')">
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </button>
+
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -159,4 +177,76 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="editOrderModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5>Edit Order</h5>
+                    <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="editOrderForm" method="POST">
+                    @csrf
+
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label>Name</label>
+                            <input type="text" id="editName" name="name" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Whatsapp</label>
+                            <input type="text" id="editWhatsapp" name="whatsapp" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="text" id="editEmail" name="email" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Subject</label>
+                            <input type="text" id="editSubject" name="subject" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Message</label>
+                            <textarea id="editMessage" name="message" class="form-control"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-custom">Update Order</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
 @endsection
+@push('script')
+    <script>
+        document.querySelectorAll(".editOrderBtn").forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                let id = this.dataset.id;
+
+                document.getElementById("editName").value = this.dataset.name;
+                document.getElementById("editWhatsapp").value = this.dataset.whatsapp;
+                document.getElementById("editEmail").value = this.dataset.email;
+                document.getElementById("editSubject").value = this.dataset.subject;
+                document.getElementById("editMessage").value = this.dataset.message;
+
+                document.getElementById("editOrderForm").action = "/admin/order/update/" + id;
+
+            });
+
+        });
+    </script>
+@endpush

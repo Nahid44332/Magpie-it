@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Models\Banner;
 use App\Models\Order;
+use App\Models\Portfolio;
 use App\Models\Pricing;
 use App\Models\Service;
 use App\Models\TeamIntro;
@@ -45,13 +46,17 @@ class FrontendController extends Controller
 
     public function protfolio()
     {
-        return view('frontend.protfolio');
+        $portfolios = Portfolio::latest()->get();
+        return view('frontend.protfolio',compact('portfolios'));
     }
 
-    public function protfolioDetails()
-    {
-        return view('frontend.protfolio-details');
-    }
+    public function protfolioDetails($id)
+{
+    // আইডি দিয়ে সিঙ্গেল পোর্টফোলিও ডেটা নিয়ে আসা
+    $portfolio = Portfolio::with('gallery')->findOrFail($id); 
+    
+    return view('frontend.protfolio-details', compact('portfolio'));
+}
 
     public function team()
     {

@@ -4,8 +4,10 @@ use App\Http\Controllers\backend\admincontroller;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\backend\AboutController;
 use App\Http\Controllers\backend\bannercontroller;
+use App\Http\Controllers\backend\CelenderController;
 use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\PricingController;
+use App\Http\Controllers\backend\ProtfolioController;
 use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\TeamController;
 use App\Http\Controllers\FrontendController;
@@ -19,7 +21,7 @@ Route::get('/about', [FrontendController::class, 'about']);
 Route::get('/service', [FrontendController::class, 'service']);
 Route::get('/service-details/{id}', [FrontendController::class, 'serviceDetails']);
 Route::get('/protfolio', [FrontendController::class, 'protfolio']);
-Route::get('/protfolio-details', [FrontendController::class, 'protfolioDetails']);
+Route::get('/protfolio-details/{id}', [FrontendController::class, 'protfolioDetails']);
 Route::get('/team', [FrontendController::class, 'team']);
 Route::get('/blog', [FrontendController::class, 'blog']);
 Route::get('/blog-details', [FrontendController::class, 'blogDetails']);
@@ -77,5 +79,20 @@ Route::get('/admin/pricing/delete/{id}', [PricingController::class,'delete']);
 //Pricing Route End...
 
 //Order Route Start...
-Route::get('/admin/order', [OrderController::class, 'Order']);
+Route::get('/admin/order/{status}', [OrderController::class, 'Order']);
 Route::post('/order/status/{id}', [OrderController::class,'statusUpdate'])->name('order.status');
+Route::post('/admin/order/update/{id}',[OrderController::class,'update'])->name('order.update');
+Route::delete('/admin/order/delete/{id}',[OrderController::class,'delete'])->name('order.delete');
+//order Route End...
+
+// Protfolio Route Start...
+Route::get('/admin/portfolio', [ProtfolioController::class, 'portfolio'])->name('portfolio.index');
+Route::post('/admin/portfolio/store', [ProtfolioController::class, 'store'])->name('portfolio.store');
+Route::put('/admin/portfolio/update/{id}', [ProtfolioController::class, 'update'])->name('portfolio.update');
+Route::delete('/admin/portfolio/delete/{id}', [ProtfolioController::class, 'destroy'])->name('portfolio.delete');
+// Protfolio Route End...
+
+//Celender Route Start...
+Route::get('/admin/celender', [CelenderController::class, 'celender']);
+Route::post('/admin/celender/event/store', [CelenderController::class, 'eventStore'])->name('event.store');
+Route::delete('/events/delete/{id}', [CelenderController::class, 'destroy'])->name('event.delete');
