@@ -186,14 +186,27 @@
     <!-- Contact Form -->
     <div class="col-lg-8">
       <div class="contact-form">
-        <form id="contactForm">
+        <form id="contactForm" action="{{route('contact.store')}}" method="POST">
+          @csrf
           <div class="row g-3">
-            <div class="col-md-6"><input type="text" name="name" placeholder="Your Name" required></div>
-            <div class="col-md-6"><input type="email" name="email" placeholder="Your Email" required></div>
-            <div class="col-md-6"><input type="phone" name="phone" placeholder="Your Whatsapp Number" required></div>
-            <div class="col-6"><input type="text" name="subject" placeholder="Subject" required></div>
-            <div class="col-12"><textarea name="message" rows="5" placeholder="Your Message" required></textarea></div>
-            <div class="col-12 text-center"><button type="submit">Send Message</button></div>
+            <div class="col-md-6">
+              <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6">
+              <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="col-md-6">
+              <input type="phone" name="phone" placeholder="Your Whatsapp Number" required>
+            </div>
+            <div class="col-6">
+              <input type="text" name="subject" placeholder="Subject" required>
+            </div>
+            <div class="col-12">
+              <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <div class="col-12 text-center">
+              <button type="submit">Send Message</button>
+            </div>
           </div>
         </form>
       </div>

@@ -552,8 +552,8 @@
         }
 
         /* =========================
-                                                           GLOBAL RESPONSIVE FIX
-                                                        ========================= */
+                                                                           GLOBAL RESPONSIVE FIX
+                                                                        ========================= */
         img,
         canvas {
             max-width: 100%;
@@ -561,8 +561,8 @@
         }
 
         /* =========================
-                                                           MAIN CONTENT RESPONSIVE
-                                                        ========================= */
+                                                                           MAIN CONTENT RESPONSIVE
+                                                                        ========================= */
         @media (max-width: 992px) {
             .main {
                 padding: 20px;
@@ -570,8 +570,8 @@
         }
 
         /* =========================
-                                                           NAVBAR FIX
-                                                        ========================= */
+                                                                           NAVBAR FIX
+                                                                        ========================= */
         @media (max-width: 576px) {
             .navbar-top {
                 flex-direction: column;
@@ -581,8 +581,8 @@
         }
 
         /* =========================
-                                                           SIDEBAR MOBILE SAFE
-                                                        ========================= */
+                                                                           SIDEBAR MOBILE SAFE
+                                                                        ========================= */
         @media (max-width: 768px) {
             .sidebar {
                 width: 240px;
@@ -602,8 +602,8 @@
         }
 
         /* ===============================
-                                                           GLOBAL MOBILE SCROLL FIX
-                                                        ================================ */
+                                                                           GLOBAL MOBILE SCROLL FIX
+                                                                        ================================ */
         @media (max-width: 768px) {
             body {
                 display: block;
@@ -953,6 +953,8 @@
                                             data-challenge="{{ $portfolio->challenge }}"
                                             data-solution="{{ $portfolio->solution }}"
                                             data-features="{{ json_encode($portfolio->features) }}"
+                                            data-image="{{ asset($portfolio->main_image) }}"
+                                            data-gallery="{{ $portfolio->portfolio_galleries ? json_encode($portfolio->portfolio_galleries->pluck('image')) : '[]' }}"
                                             data-bs-toggle="modal" data-bs-target="#editDetailsModal">
                                             <i class="bi bi-pencil"></i> Edit
                                         </button>
@@ -1092,7 +1094,9 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="editPortfolioForm" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
                         <div class="row g-3">
                             <!-- Portfolio Intro -->
                             <div class="col-md-6">
@@ -1164,29 +1168,16 @@
                             <div class="col-md-6">
                                 <label>Main Project Image</label>
                                 <input type="file" class="form-control">
-                                <small class="text-white">Current: <a href="assets/img/portfolio/portfolio-12.webp"
-                                        target="_blank">View Image</a></small>
+                                <small class="text-white">Current: <a id="edit_image_link" href="#"
+                                        target="_blank">
+                                        <img id="edit_image_preview" src=""
+                                            style="width: 80px; height: 50px; border-radius: 5px; border: 1px solid #ddd;">
+                                    </a></small>
                             </div>
                             <!-- Gallery Images -->
                             <div class="col-md-6">
                                 <label>Gallery Images</label>
                                 <div id="editGalleryWrapper">
-                                    <div class="input-group mb-2">
-                                        <input type="file" class="form-control">
-                                        <small class="text-white ms-2">Current: <a
-                                                href="assets/img/portfolio/portfolio-4.webp"
-                                                target="_blank">View</a></small>&nbsp;&nbsp;
-                                        <button class="btn btn-outline-danger removeGalleryBtn"
-                                            type="button">Remove</button>
-                                    </div>
-                                    <div class="input-group mb-2">
-                                        <input type="file" class="form-control">
-                                        <small class="text-white ms-2">Current: <a
-                                                href="assets/img/portfolio/portfolio-6.webp"
-                                                target="_blank">View</a></small>&nbsp;&nbsp;
-                                        <button class="btn btn-outline-danger removeGalleryBtn"
-                                            type="button">Remove</button>
-                                    </div>
                                     <button class="btn btn-outline-secondary addGalleryBtn" type="button">Add
                                         More</button>
                                 </div>
@@ -1227,11 +1218,11 @@
                                         More</button>
                                 </div>
                             </div>
+                            <div class="modal-footer border-0">
+                                <button type="submit" class="btn btn-custom px-4">Save Changes</button>
+                            </div>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-custom px-4">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -1462,12 +1453,13 @@
         });
     </script>
     <script>
+        // ১. পোর্টফোলিও ডিলিট করার লজিক
         $(document).on('click', '.deletePortfolioBtn', function() {
             let id = $(this).data('id');
-           let url = "{{ route('portfolio.delete', '') }}/" + id; // আপনার রাউট অনুযায়ী পাথ ঠিক করে নিন
+            let url = "{{ route('portfolio.delete', '') }}/" + id;
             let row = $(this).closest('tr');
 
-            if (confirm('আপনি কি নিশ্চিত যে আপনি এটি ডিলিট করতে চান? সব ইমেজও ডিলিট হয়ে যাবে!')) {
+            if (confirm('আপনি কি নিশ্চিত যে আপনি এটি ডিলিট করতে চান? সব ইমেজও ডিলিট হয়ে যাবে!')) {
                 $.ajax({
                     url: url,
                     type: 'DELETE',
@@ -1483,10 +1475,66 @@
                         }
                     },
                     error: function() {
-                        alert('কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন।');
+                        alert('কিছু একটা সমস্যা হয়েছে, আবার চেষ্টা করুন।');
                     }
                 });
             }
+        });
+
+        // ২. এডিট মডাল ওপেন এবং ডাটা সেট করার লজিক
+        $(document).on('click', '.editDetailsBtn', function() {
+            // মেইন ইমেজ প্রিভিউ সেট করা
+            let imageUrl = $(this).data('image');
+            if (imageUrl) {
+                // পাথের শুরুতে / আছে কি না চেক করে ইউআরএল ঠিক করা
+                let mainPath = imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl;
+                $('#edit_image_preview').attr('src', mainPath);
+                $('#edit_image_link').attr('href', mainPath);
+            } else {
+                $('#edit_image_preview').attr('src', '/assets/img/no-image.jpg');
+            }
+
+            // --- গ্যালারি ইমেজ ডাইনামিক করা ---
+
+            // আগে যদি কোনো গ্যালারি ইনপুট থেকে থাকে তবে সেগুলো ক্লিয়ার করা (Add More বাটন বাদে)
+            $('#editGalleryWrapper').find('.gallery-item').remove();
+
+            let galleryData = $(this).data('gallery');
+            // ডাটা স্ট্রিং হিসেবে আসলে অবজেক্টে কনভার্ট করা
+            let galleryArray = (typeof galleryData === 'string') ? JSON.parse(galleryData) : galleryData;
+
+            if (galleryArray && galleryArray.length > 0) {
+                $.each(galleryArray, function(index, path) {
+                    // ব্রাউজারে ভিউ করার জন্য সঠিক পাথ তৈরি
+                    let fullUrl = path.startsWith('/') ? path : '/' + path;
+
+                    $('.addGalleryBtn').before(`
+                    <div class="input-group mb-2 gallery-item">
+                        <input type="file" name="gallery_images[]" class="form-control">
+                        <input type="hidden" name="existing_gallery[]" value="${path}">
+                        <small class="text-white ms-2 mt-2">
+                            Current: <a href="${fullUrl}" target="_blank">View Image</a>
+                        </small>
+                        <button class="btn btn-outline-danger removeGalleryBtn ms-2" type="button">Remove</button>
+                    </div>
+                `);
+                });
+            }
+        });
+
+        // ৩. মডালের ভেতর নতুন গ্যালারি ইনপুট ফিল্ড যোগ করা (Add More বাটন)
+        $(document).on('click', '.addGalleryBtn', function() {
+            $(this).before(`
+            <div class="input-group mb-2 gallery-item">
+                <input type="file" name="gallery_images[]" class="form-control">
+                <button class="btn btn-outline-danger removeGalleryBtn ms-2" type="button">Remove</button>
+            </div>
+        `);
+        });
+
+        // ৪. গ্যালারি ইনপুট রো রিমুভ করা
+        $(document).on('click', '.removeGalleryBtn', function() {
+            $(this).closest('.gallery-item').remove();
         });
     </script>
 @endpush

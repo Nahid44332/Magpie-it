@@ -49,8 +49,8 @@
         <li><a href="{{url('/admin/portfolio')}}"><i class="bi bi-folder"></i> Projects</a></li>
         <li><a href="{{url('/admin/celender')}}"><i class="bi bi-calendar"></i> Calendar</a></li>
         <li><a href="profile.html"><i class="bi bi-person"></i> Profile</a></li>
-        <li><a href="message.html"><i class="bi bi-telephone"></i> Message</a></li>
-        <li><a href="file.html"><i class="bi bi-file-earmark"></i> Files</a></li>
+        <li><a href="{{url('/admin/message')}}"><i class="bi bi-telephone"></i> Message</a></li>
+        <li><a href="{{url('/admin/file')}}"><i class="bi bi-file-earmark"></i> Files</a></li>
         <li><a href="analytics.html"><i class="bi bi-bar-chart"></i> Analytics</a></li>
         <li><a href="bloging.html"><i class="bi bi-journal-text"></i> Blog</a></li>
         <li><a href="chat.html"><i class="bi bi-chat-dots"></i> Live chat</a></li>

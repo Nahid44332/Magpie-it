@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\backend\AboutController;
 use App\Http\Controllers\backend\bannercontroller;
 use App\Http\Controllers\backend\CelenderController;
+use App\Http\Controllers\backend\FileControlller;
+use App\Http\Controllers\backend\MessageController;
 use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\PricingController;
 use App\Http\Controllers\backend\ProtfolioController;
@@ -27,6 +29,7 @@ Route::get('/blog', [FrontendController::class, 'blog']);
 Route::get('/blog-details', [FrontendController::class, 'blogDetails']);
 Route::get('/pricing', [FrontendController::class, 'pricing']);
 Route::get('/contact', [FrontendController::class, 'contact']);
+Route::post('/contact/store', [FrontendController::class, 'contactStore'])->name('contact.store');
 Route::get('/order', [FrontendController::class, 'order']);
 Route::post('/order/store', [FrontendController::class, 'orderStore']);
 
@@ -90,9 +93,23 @@ Route::get('/admin/portfolio', [ProtfolioController::class, 'portfolio'])->name(
 Route::post('/admin/portfolio/store', [ProtfolioController::class, 'store'])->name('portfolio.store');
 Route::put('/admin/portfolio/update/{id}', [ProtfolioController::class, 'update'])->name('portfolio.update');
 Route::delete('/admin/portfolio/delete/{id}', [ProtfolioController::class, 'destroy'])->name('portfolio.delete');
+Route::post('/admin/portfolio/update-details/{id}', [ProtfolioController::class, 'updateDetails'])->name('portfolio.update.details');
 // Protfolio Route End...
 
 //Celender Route Start...
 Route::get('/admin/celender', [CelenderController::class, 'celender']);
 Route::post('/admin/celender/event/store', [CelenderController::class, 'eventStore'])->name('event.store');
 Route::delete('/events/delete/{id}', [CelenderController::class, 'destroy'])->name('event.delete');
+//Celender Route End...
+
+//Message Route Start...
+Route::get('/admin/message', [MessageController::class, 'message']);
+Route::get('/admin/messages/status/{id}', [MessageController::class, 'toggleStatus'])->name('messages.status');
+Route::get('/admin/messages/delete/{id}', [MessageController::class, 'destroy'])->name('messages.delete');
+
+//message route end..
+
+//file route start...
+Route::get('/admin/file', [FileControlller::class, 'file']);
+Route::post('admin/files/upload', [FileControlller::class, 'store'])->name('files.store');
+Route::delete('admin/files/delete/{id}', [FileControlller::class, 'destroy'])->name('files.destroy');

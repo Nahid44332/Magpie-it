@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\ContactMessage;
 use App\Models\Order;
 use App\Models\Portfolio;
 use App\Models\Pricing;
@@ -110,5 +111,19 @@ class FrontendController extends Controller
     public function contact()
     {
         return view('frontend.contact');
+    }
+
+    public function contactStore(Request $request)
+    {
+        $contact = new ContactMessage();
+
+        $contact->name = $request->name;      
+        $contact->email = $request->email;      
+        $contact->phone = $request->phone;      
+        $contact->subject = $request->subject;      
+        $contact->message = $request->message;
+        
+        $contact->save();
+        return redirect()->back();
     }
 }
